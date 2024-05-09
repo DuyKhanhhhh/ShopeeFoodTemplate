@@ -1,0 +1,80 @@
+*{
+    box-sizing: border-box;
+    
+}
+.container{
+    width: 1136px;
+    margin: auto;
+    padding: 24px 0 35px;
+    font-size: 14px;
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.containerCreate{
+    margin-top: 20px;
+    padding: 24px 220px 30px;
+    background-color: #fff;
+}
+.warning{
+    color: red;
+}
+.btnBack{
+    margin-right: 20px;
+    width: 120px;
+    min-height: 32px;
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: unset;
+    border-color: white;
+}
+.btnSave{
+    width: 120px;
+    min-height: 32px;
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: unset;
+    background: #ee4d2d;
+    color: #fff;
+    border-color: #ee4d2d;
+}
+.btnCreate{
+    font-size: 14px;
+    border-radius: 8px;
+    min-width: unset;
+    background: #ee4d2d;
+    color: #fff;
+    border-color: #ee4d2d;
+    padding: 10px;
+    text-decoration: none;
+}
+.right{
+    text-align: right;
+}
+.tabContainer{
+    background-color: #fff;
+    height: 50px;
+    padding: 0 5px;
+}
+.textOrange{
+    font-weight: 700;
+    font-size: 14px;
+    padding:  15px;
+    display: inline-block;
+    line-height: 1.5;
+    color: #ee4d2d;
+}
+.listShop{
+    background: #fff;
+    padding: 20px;
+    margin-top: 12px;
+    height: 600px;
+}
+.emtyList{
+    background: #fff;
+    text-align: center;
+    margin-top: 15px;
+    padding: 130px 0 170px;
+}

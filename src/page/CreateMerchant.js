@@ -1,6 +1,6 @@
 import React from 'react'
 import HeadMerchant from '../compoment/HeadMerchant'
-import '../css/CreateMerchant.css';
+import '../css/LayoutMarchant.css';
 
 export default function CreateMerchant() {
     return (
