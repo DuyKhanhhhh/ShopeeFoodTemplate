@@ -4,7 +4,7 @@ import '../css/CreateMerchant.css';
 
 export default function CreateMerchant() {
     return (
-        <div className='body'>
+        <div>
             <HeadMerchant />
             <div className='container' >
                 <div className='containerCreate '>
