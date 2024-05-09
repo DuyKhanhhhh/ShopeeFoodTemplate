@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+    
+}
+.body{
+    background-color: #f5f5f5;
+}
+.container{
+    margin: auto;
+    padding: 24px 0 35px;
+    font-size: 14px;
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+.containerCreate{
+    margin-top: 20px;
+    padding: 24px 220px 30px;
+    background-color: #fff;
+}
+.warning{
+    color: red;
+}
+.btnBack{
+    margin-right: 20px;
+    width: 100px;
+    min-height: 32px;
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: unset;
+    border-color: white;
+}
+.btnSave{
+    width: 100px;
+    min-height: 32px;
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: unset;
+    background: #ee4d2d;
+    color: #fff;
+    border-color: #ee4d2d;
+}
