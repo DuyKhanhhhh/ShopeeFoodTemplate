@@ -35,6 +35,7 @@ function CreateNewFood(){
                                 <input type="email" class="form-control"  />
                             </div>
                         </div>
+                        
                         <div className="row mb-3">
                             <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Danh mục</label>
                             <div className="col-sm-10">
