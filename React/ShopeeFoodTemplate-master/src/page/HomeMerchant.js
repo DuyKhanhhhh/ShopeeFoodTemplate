@@ -18,10 +18,10 @@ export default function HomeMerchant() {
         <div>
             <HeadMerchant />
             <div className='container'>
-                <div className='row flex-container mt-5'>
+                <div className='row flex-container '>
                     <div className='col-xs-12 col-md-6 title'>Đăng Ký Quán</div>
                     <div className='col-xs-12 col-md-6 right'>
-                        <Link to={'/createMerchant'} className=' btnCreate'>Tạo quán mới</Link>
+                        <Link to={'/create'} className=' btnCreate'>Tạo quán mới</Link>
                     </div>
                 </div>
                 <div className='tabContainer'>
@@ -32,13 +32,12 @@ export default function HomeMerchant() {
                         <div className='carShop'>
                             <img className='image' src={process.env.PUBLIC_URL + '/img/' + item.image} alt="" />
                             <span className='carShopNameText'>{item.name}</span>
-                            <span className='carShopNameText'>{item.name}</span>
 
                         </div>
                     ))}
 
                 </div>
             </div>
-        </div >
+        </div>
     )
 }

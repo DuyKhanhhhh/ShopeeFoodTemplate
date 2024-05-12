@@ -1,7 +1,6 @@
 import React from 'react'
 import HeadMerchant from '../compoment/HeadMerchant'
 import '../css/LayoutMarchant.css';
-import { Link } from 'react-router-dom';
 
 export default function CreateMerchant() {
     return (
@@ -72,7 +71,7 @@ export default function CreateMerchant() {
                         <div className="row mb-3">
                             <label class="col-sm-2 col-form-label"></label>
                             <div className='col'>
-                                <Link to={'/'} className=' btnBack'>Quay lại</Link>
+                                <button className=' btnBack'>Quay lại</button>
                                 <button className=' btnSave'>Lưu</button>
                             </div>
                         </div>

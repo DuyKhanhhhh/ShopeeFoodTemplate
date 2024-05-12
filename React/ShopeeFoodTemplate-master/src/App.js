@@ -1,21 +1,22 @@
+import HeadMerchant from './compoment/HeadMerchant';
+import CreateMerchant from './page/CreateMerchant';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import CreateNewFood from './Product/CreateNewFood';
-import FoodList from './Product/FoodList';
+import CreateNewFood from './page/CreateNewFood';
+import FoodList from './page/FoodList';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomeMerchant from './Merchant/HomeMerchant';
-import CreateMerchant from './Merchant/CreateMerchant';
+import HomeMerchant from './page/HomeMerchant';
 
 function App() {
   return (
     <div >
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomeMerchant />} ></Route>
-          <Route path='/createMerchant' element={<CreateMerchant />} ></Route>
-          <Route path="/createFood" element={<CreateNewFood />}></Route>
-          <Route path="/foodList" element={<FoodList />}></Route>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<HomeMerchant />} ></Route>
+      <Route path='/create' element={<CreateMerchant />} ></Route>
+      <Route path="/" element={<CreateNewFood />}></Route>
+      <Route path="/FoodList" element={<FoodList />}></Route>
+    </Routes>
+    </BrowserRouter>
     </div>
   );
 }
