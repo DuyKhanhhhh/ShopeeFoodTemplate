@@ -18,16 +18,8 @@ function CreateNewFood() {
   const [selectedMenuId, setSelectedMenuId] = useState(1); // Mặc định chọn menu đầu tiên
   async function createProduct(e) {
     e.preventDefault();
-    console.log(name);
-    console.log(price);
-    console.log(quantity);
-    console.log(image);
-    console.log(detail);
-    console.log(selectedMenuId);
-
     try {
       var formData = new FormData();
-
       formData.append('name', name);
       formData.append('price', price);
       formData.append('quantity', quantity);
@@ -35,7 +27,7 @@ function CreateNewFood() {
       formData.append('detail', detail);
       formData.append('menus', selectedMenuId);
 
-      const response = await axios.post(`http://localhost:8080/products`, formData, {
+      const response = await axios.post(`http://localhost:8080/api/products`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       navigate('/')
@@ -80,7 +72,6 @@ function CreateNewFood() {
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-xl-9">
-                  <h1 className="text-white mb-4">Apply for a job</h1>
                   <div className="card" style={{ borderRadius: '15px' }}>
                     <div className="card-body">
                       <div className="row align-items-center pt-4 pb-3">
@@ -114,7 +105,7 @@ function CreateNewFood() {
                           <h6 className="mb-0">Danh mục</h6>
                         </div>
                         <div className="col-md-9 pe-5">
-                          <select onChange={handleMenuChange} value={selectedMenuId}>
+                          <select class="form-select" onChange={handleMenuChange} value={selectedMenuId}>
                             {menus.map((menu) => (
                               <option key={menu.id} value={menu.id}>
                                 {menu.name}
