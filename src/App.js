@@ -11,10 +11,11 @@ function App() {
     <div >
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<HomeMerchant />} ></Route>
-      <Route path='/create' element={<CreateMerchant />} ></Route>
-      <Route path="/" element={<CreateNewFood />}></Route>
+      <Route path='/HomeMerchant' element={<HomeMerchant />} ></Route>
+      <Route path='/CreateMerchant' element={<CreateMerchant />} ></Route>
+      <Route path="/CreateNewFood" element={<CreateNewFood />}></Route>
       <Route path="/FoodList" element={<FoodList />}></Route>
+      
     </Routes>
     </BrowserRouter>
     </div>
