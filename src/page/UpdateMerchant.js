@@ -112,16 +112,11 @@ function UpdateMerchant() {
 
     return (
         <>
-            <body>
                 <HeaderMerchant />
-
-                <section className="vh-100" style={{ backgroundColor: '#ffffff' }}>
                     <form onSubmit={CreateMerchant}>
                         <div className='container' >
                             <div className='containerCreate '>
-                                <div className='title'>Thông tin đăng ký quán</div>
-
-
+                                <div className='title'>Chỉnh sửa thông tin quán</div>
                                 <div className="row mb-3">
 
                                     <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Tên quán </label>
@@ -144,7 +139,7 @@ function UpdateMerchant() {
                                 <div className="row mb-3">
                                     <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Địa chỉ </label>
                                     <div className="col-sm-10">
-                                        <input type="email" value={address}  onChange={(e) => setAddress(e.target.value)} class="form-control" id="text" />
+                                        <input type="text" value={address}  onChange={(e) => setAddress(e.target.value)} class="form-control" id="text" />
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -198,7 +193,7 @@ function UpdateMerchant() {
                                     <label class="col-sm-2 col-form-label"></label>
                                     <div className='col'>
                                         <Link to={"/"} className=' btnBack'>Quay lại</Link>
-                                        <button type="submit" className="btn btn-primary btn-lg">
+                                        <button type="submit" className="btnSave">
                                             Lưu
                                         </button>
                                     </div>
@@ -207,8 +202,6 @@ function UpdateMerchant() {
                             </div>
                         </div>
                     </form>
-                </section>
-            </body>
         </>
     );
 }

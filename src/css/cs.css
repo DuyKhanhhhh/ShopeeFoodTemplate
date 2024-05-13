@@ -17,6 +17,10 @@
     align-items: center;
     box-sizing: border-box;
 }
+.link{
+    text-decoration: none;
+    color: black;
+}
 
 .header_left {
     line-height: 0;
@@ -26,6 +30,7 @@
     color: #fff;
     font-size: 20px;
     font-weight: 600;
+    
 }
 
 body {
