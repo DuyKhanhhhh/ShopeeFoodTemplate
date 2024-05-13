@@ -1,5 +1,7 @@
 import HeadMerchant from './compoment/HeadMerchant';
 import CreateMerchant from './page/CreateMerchant';
+import UpdateMerchant from './page/UpdateMerchant';
+// import A from './page/A';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import CreateNewFood from './page/CreateNewFood';
 import FoodList from './page/FoodList';
@@ -13,7 +15,8 @@ function App() {
     <Routes>
       <Route path='/' element={<HomeMerchant />} ></Route>
       <Route path='/create' element={<CreateMerchant />} ></Route>
-      <Route path="/" element={<CreateNewFood />}></Route>
+      <Route path='/updateShop/:id' element={<UpdateMerchant />} ></Route>
+      <Route path="/createFood" element={<CreateNewFood />}></Route>
       <Route path="/FoodList" element={<FoodList />}></Route>
     </Routes>
     </BrowserRouter>
