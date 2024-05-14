@@ -17,7 +17,7 @@ function App() {
       <Route path='/create' element={<CreateMerchant />} ></Route>
       <Route path='/updateShop/:id' element={<UpdateMerchant />} ></Route>
       <Route path="/createFood" element={<CreateNewFood />}></Route>
-      <Route path="/FoodList" element={<FoodList />}></Route>
+      <Route path="/foodList" element={<FoodList />}></Route>
     </Routes>
     </BrowserRouter>
     </div>
