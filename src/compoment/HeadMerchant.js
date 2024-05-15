@@ -9,13 +9,10 @@ export default function HeadMerchant() {
            <header class="header">
                 <div class="header_left">
                     <FontAwesomeIcon icon={faCoffee} />
-                    <span class="ms-3">Thêm món </span>
+                    <span class="ms-3">Xem món ăn</span>
 
                 </div>
-                <div class="header_right">
-                    <FontAwesomeIcon icon={faExclamation} />
-                    <span class="me-5"></span>
-                </div>
+               
             </header>
         </div>
     )
