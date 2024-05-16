@@ -12,7 +12,6 @@ export default function HomeMerchant() {
     const showShop = async () => {
         const result = await axios.get("http://localhost:8080/api/shops")
         setShop(result.data);
-        console.log(result.data);
     };
     return (
         <div>
@@ -25,13 +24,13 @@ export default function HomeMerchant() {
                     </div>
                 </div>
                 <div className='tabContainer'>
-                    <span className='textOrange'>Quán của tôi (1)</span>
+                    <span className='textOrange'>Quán của tôi </span>
                 </div>
                 <div className='listShop'>
                     {shop.map(item => (
-                        <div className='carShop'>
+                        <div className='carShop' key={item.id}>
                             <Link to={'/foodList'}>
-                                <img className='image' src={`img/${item.image}`} alt="" />
+                                <img className='image' src={`http://localhost:8080/img/${item.image}`} alt="" />
 
                             </Link>
                             <div className='carShopBody'>

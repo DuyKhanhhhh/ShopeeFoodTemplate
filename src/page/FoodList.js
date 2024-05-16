@@ -81,7 +81,7 @@ function FoodList() {
                                         <th scope="row">{index + 1}</th>
                                         <td>{item.name}</td>
                                         <td>{item.price}</td>
-                                        <td><img className='image' src={`img/${item.image}`} alt="" /></td>
+                                        <td><img className='image' src={`http://localhost:8080/img/${item.image}`} alt="" /></td>
                                         <td>{item.quantity}</td>
                                         <td>
                                             <image src={process.env.PUBLIC_URL + '/' + item.image}></image>
