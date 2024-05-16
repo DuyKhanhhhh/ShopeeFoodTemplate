@@ -4,6 +4,7 @@ import axios from "axios";
 import '../css/LayoutMarchant.css'
 import '../css/cs.css'
 import '../css/table.css'
+import '../css/LayoutMarchant.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTrash, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import HeaderMerchant from "../compoment/HeadMerchant.js";
@@ -61,12 +62,17 @@ function FoodList() {
                 <div className="container row mt-3">
                     <div className="col-xs-12 col-md-6 title">
                         <Link className="btnSave" to={'/createFood'}>+ Thêm Sẩn Phẩm</Link>
+
+
                     </div>
                     <form className="col-xs-12 col-md-6 right" onSubmit={handleSearch}>
                         <div className="input-group">
                             <input
                                 type="text"
+
                                 className="form-control "
+
+
                                 placeholder="Search..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -77,6 +83,7 @@ function FoodList() {
                         </div>
                     </form>
                 </div>
+
                 {menuProducts.map((menuProduct, index) => (
                     <div key={index}>
                         {menuProduct.products.length > 0 && (
@@ -113,6 +120,7 @@ function FoodList() {
                                 </table>
                             </>
                         )}
+
                     </div>
                 ))}
                

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import HeaderMerchant from "../compoment/HeadMerchant.js";
-
 function UpdateMerchant() {
     const navigate = useNavigate()
     const [id, setId] = useState('');
