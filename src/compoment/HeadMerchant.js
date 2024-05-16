@@ -14,11 +14,7 @@ export default function HeadMerchant() {
                         <span class="ms-3">Marchant </span>
                     </Link>
                 </div>
-                <div class="header_right">
-                    <FontAwesomeIcon icon={faExclamation} />
-                    <span class="me-5"></span>
-                </div>
-
+               
             </header>
         </div>
     )

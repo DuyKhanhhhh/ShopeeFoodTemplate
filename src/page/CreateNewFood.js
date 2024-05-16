@@ -39,7 +39,7 @@ function CreateNewFood() {
 
   async function getListMenu() {
     try {
-      const response = await axios.get(`http://localhost:8080/menus`);
+      const response = await axios.get(`http://localhost:8080/api/menus/`);
       setMenus(response.data);
       console.log(response.data);
     } catch (error) {
