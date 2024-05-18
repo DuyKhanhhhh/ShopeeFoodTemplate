@@ -10,13 +10,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import HeaderMerchant from "../compoment/HeadMerchant.js";
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import MyButton from './MyButton';
 function FoodList() {
     const [searchList, setSearchList] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     async function searchListData(query) {
         try {
-            let endpoint = 'http://localhost:8080/api/products/ProductListByMenuId/13';
+            let endpoint = 'http://localhost:8080/api/products/ProductListByMenuId/5';
             if (query) {
                 endpoint = `http://localhost:8080/api/products/FindByPByName/13?productName=${query}`;
             }
@@ -83,6 +84,7 @@ function FoodList() {
                                         <td>{item.price}</td>
                                         <td><img className='image' src={`http://localhost:8080/img/${item.image}`} alt="" /></td>
                                         <td>{item.quantity}</td>
+                                    
                                         <td>
                                             <image src={process.env.PUBLIC_URL + '/' + item.image}></image>
                                         </td>
@@ -91,6 +93,7 @@ function FoodList() {
                                             <FontAwesomeIcon icon={faTrash} />
                                             <FontAwesomeIcon icon={faPenSquare} />
                                         </td>
+                                        <MyButton />
                                     </tr>
                                 ))}
                             </tbody>

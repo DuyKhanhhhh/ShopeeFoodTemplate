@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import HeaderMerchant from "../compoment/HeadMerchant.js";
-import Validation from "./Validation.js";
+import Validation from "./Validate/ValidationFood.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -75,7 +75,7 @@ function handleValidation(event){
       await axios.post("http://localhost:8080/api/products", formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      navigate('/')
+      navigate('/foodList')
     } catch (error) {
       console.error("Error submitting form:", error);
     }

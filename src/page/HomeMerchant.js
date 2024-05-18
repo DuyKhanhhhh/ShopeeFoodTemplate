@@ -4,6 +4,8 @@ import '../css/LayoutMarchant.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
+
 export default function HomeMerchant() {
     const [shop, setShop] = useState([]);
     useEffect(() => {
@@ -42,8 +44,9 @@ export default function HomeMerchant() {
                                     <span className='carShopTitleText'>Sản Phẩm: {item.idCategory.name} </span>
                                     <span className='carShopTitleText'>Giờ Mở Cửa: {item.timeStart} </span>
                                     <span className='carShopTitleText'>Giờ Đóng Cửa: {item.timeEnd}</span>
+                                   
                                 </div>
-
+                            
                                 <Link to={`updateShop/${item.id}`} className='carShopAction '>Sửa</Link>
                             </div>
                         </div>
