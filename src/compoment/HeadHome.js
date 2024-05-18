@@ -1,9 +1,25 @@
 import React from 'react'
 import '../css/HeadHome.css';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export default function HeadHome() {
+    const [citys, setCity] = useState([]);
+    const [category, setCategory] = useState([]);
 
+    async function getListCites() {
+        const response = await axios.get(`http://localhost:8080/api/cities`);
+        setCity(response.data);
+    }
+    async function getListCategory() {
+        const response = await axios.get(`http://localhost:8080/api/categories`);
+        setCategory(response.data);
+    }
+    useEffect(() => {
+        getListCategory();
+        getListCites();
+    }, []);
     return (
         <div className='wrapper'>
             <header className='main-header'>
@@ -21,15 +37,18 @@ export default function HeadHome() {
                                         Ha Noi
                                     </button>
                                     <div class="dropdown-content">
-                                        <span><a class="dropdown-item" href="#">Action</a></span>
-                                        <span><a class="dropdown-item" href="#">Another action</a></span>
-                                        <span><a class="dropdown-item" href="#">Something else here</a></span>
+                                        {citys.map((city) => (
+                                            <span><a class="dropdown-item" href="#">  {city.name}</a></span>
+
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                             <div className='main-nav col'>
-                                <div className='nav-item'>Do An</div>
-                                <div className='nav-item'>Do An</div>
+                                {category.map((category) => (
+                                    <div className='nav-item'>{category.name}</div>
+
+                                ))}
                             </div>
                             <div className='user-acc col-auto'>
                                 <div className='dropdown'>
@@ -37,7 +56,7 @@ export default function HeadHome() {
                                         <div className='img'>
                                             <img src='https://cdn-icons-png.flaticon.com/512/1144/1144760.png'></img>
                                         </div>
-                                        <span className='name'>User</span>
+<span className='name'>User</span>
                                     </div>
                                     <div className='dropdown-content'>
                                         <span><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></span>
