@@ -1,0 +1,238 @@
+.now-detail-restaurant{
+    background-color: #fff;
+    padding-top: 30px;
+}
+.detail-restaurant-img{
+    width: 480px;
+    height: 300px;
+    position: relative;
+    float: left;
+}
+.detail-restaurant-img img{
+    width: 100%;
+    height: 100%;
+
+}
+img{
+    vertical-align: middle;
+    border-style: none;
+}
+.detail-restaurant-info{
+    color: #252525;
+    float: right;
+    width: 645px;
+    padding-bottom: 15px;
+}
+.kind-restaurant{
+    font-size: 11px;
+    color: #959595;
+    text-transform: uppercase;
+    display: -ms-flexbox;
+    display: flex;
+}
+.tag-preferred{
+    background: #f13233;
+    color: #fff;
+    padding: 3px 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-transform: none;
+}
+.kind-restaurant{
+    margin: 0 auto;
+}
+.name-restaurant{
+    font-size: 22px;
+    color: #464646;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 4px;
+    line-height: 33px;
+}
+.address-restaurant{
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+.time{
+    font-size: 15px;
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+.relative{
+    position: relative !important;
+}
+.now-menu-restaurant{
+    width: 845px;
+    margin-bottom: 20px;
+    min-height: 226px;
+    float: left;
+}
+.menu-restaurant-category 
+    menu-restaurant-category  {
+        position: absolute;
+        top: 0;
+        left: 0;
+  
+}
+.menu-restaurant-content-tab{
+    position: relative;
+}
+.menu-restaurant-category list-category {
+    position: relative;
+}
+
+.menu-restaurant-category {
+    border: 1px solid #ebebeb;
+    padding: 15px 5px 15px 15px;
+    width: 235px;
+    margin-right: 10px;
+    background: #fff;
+    border-radius: 4px;
+}
+.menu-restaurant-category scrollbar-container {
+    max-height: calc(100vh - 100px);
+    position: relative;
+}
+.ps {
+    overflow: hidden !important;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+}
+
+.btnSearch {
+    font-size: 14px;
+    border-radius: 8px;
+    min-width: unset;
+    background: #ee4d2d;
+    color: #fff;
+    border-color: #ee4d2d;
+    padding: 10px;
+    text-decoration: none;
+}
+.menu-restaurant-category list-category item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 5px 0;
+    padding: 2px 0;
+}
+.item-link {
+    font-size: 13px;
+    display: inline-block;
+    color: #6d6f71;
+    text-transform: uppercase;
+    padding: 3px 7px 1px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.menu-restaurant-detail{
+    width: 100%;
+    padding: 6px 15px;
+    float: left;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    background: #fff;
+}
+.title-menu{
+    text-transform: uppercase;
+    color: #6d6f71;
+    padding: 5px 0 0;
+    margin: 10px 0 20px;
+}
+.item-menu{
+    height: 105px;
+    left: 0px;
+    position: absolute;
+    top: 56px;
+    width: 100%;
+}
+.img-item{
+    width: 60px;
+    height: 60px;
+}
+.active{
+    font-weight: 700;
+    color: #cf2127;
+    cursor: default;
+}
+.listTitle{
+    box-sizing: border-box;
+    direction: ltr;
+    height: auto;
+    position: relative;
+    width: 558px;
+    will-change: transform;
+    overflow: auto;
+    outline: none;
+}
+.restaurant-item{
+    box-sizing: border-box;
+    direction: ltr;
+    height: auto;
+    position: relative;
+    width: 558px;
+    will-change: transform;
+    overflow: auto;
+    outline: none;
+}
+
+.menu-group{
+    height: 56px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.item-restaurant-row{
+    padding-top: 10px;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 10px;
+    position: relative;
+}
+.item-restaurant-name{
+    color: #464646;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1.3em;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.item-restaurant-desc{
+    font-size: 13px;
+    color: #464646;
+    display: block;
+    padding-top: 5px;
+    line-height: 1.6em;
+}
+.current-price{
+    font-size: 16px;
+    font-weight: 700;
+    color: #0288d1;
+}
+.price{
+    font-weight: 400;
+    position: relative;
+    top: -9px;
+    font-size: 10px;
+    right: 0;
+}
+
+.btn-adding{
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 20px;
+    width: 22px;
+    height: 22px;
+    background-color: #ee4d2d;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+}
