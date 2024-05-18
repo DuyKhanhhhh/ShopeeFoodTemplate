@@ -3,7 +3,6 @@ import HeadMerchant from '../compoment/HeadMerchant'
 import '../css/LayoutMarchant.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 export default function HomeMerchant() {
     const [shop, setShop] = useState([]);
     useEffect(() => {
@@ -25,14 +24,13 @@ export default function HomeMerchant() {
                     </div>
                 </div>
                 <div className='tabContainer'>
-                    <span className='textOrange'>Quán của tôi (1)</span>
+                    <span className='textOrange'>Quán của tôi </span>
                 </div>
                 <div className='listShop'>
                     {shop.map(item => (
                         <div className='carShop'>
                             <Link to={`/foodList/${item.id}`}>
-                                <img className='image' src={`img/${item.image}`} alt="" />
-
+                                <img className='image' src={`http://localhost:8080/img/${item.image}`} alt="" />
                             </Link>
                             <div className='carShopBody'>
                                 <div className='carShopName'>
@@ -44,7 +42,6 @@ export default function HomeMerchant() {
                                     <span className='carShopTitleText'>Giờ Mở Cửa: {item.timeStart} </span>
                                     <span className='carShopTitleText'>Giờ Đóng Cửa: {item.timeEnd}</span>
                                 </div>
-
                                 <Link to={`updateShop/${item.id}`} className='carShopAction '>Sửa</Link>
                             </div>
                         </div>
