@@ -18,7 +18,6 @@ export default function HeadMerchant() {
                     <FontAwesomeIcon icon={faExclamation} />
                     <span className="me-5"></span>
                 </div>
-
             </header>
         </div>
     )

@@ -1,7 +1,7 @@
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 import '../css/cs.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -52,6 +52,7 @@ function handleValidation(event){
     const file = e.target.files[0];
     setImage(file);
   }
+
   async function handleSubmit(event) {
     event.preventDefault();
    
@@ -190,6 +191,7 @@ function handleValidation(event){
           </div>
         </form>
       </section>
+
     </>
   );
 }

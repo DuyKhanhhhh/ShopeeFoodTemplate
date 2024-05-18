@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import HeadMerchant from "../compoment/HeadMerchant";
 import "../css/LayoutMarchant.css";
 import Validation from "./Validate/ValidateMerchantCreate.js";
-
 export default function CreateMerchant() {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
@@ -20,7 +19,6 @@ export default function CreateMerchant() {
         timeStart: '',
         timeEnd: ''
     });
-
     const [errors, setErrors] = useState({});
     async function CreateMerchant(event) {
         event.preventDefault();
@@ -34,8 +32,6 @@ export default function CreateMerchant() {
                 setErrors({ ...errors, image: "Cần có ảnh" });
                 return;
             }
-          
-
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("address", values.address);
@@ -99,6 +95,7 @@ export default function CreateMerchant() {
             <div className="container">
                 <div className="containerCreate ">
                     <div className="title">Thông tin đăng ký quán</div>
+
                     <form onSubmit={CreateMerchant} >
                         <div className="row mb-3">
 
@@ -112,7 +109,6 @@ export default function CreateMerchant() {
                                 {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
                             </div>
                         </div>
-                 
                             <div className="row mb-3">
                                 <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Số điện thoại</label>
                                 <div className="col-sm-10">
@@ -126,8 +122,11 @@ export default function CreateMerchant() {
                                 </div>
                         </div>
                         <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Email</label>
+                            <label class="col-sm-2 col-form-label">
+                                <span className="warning">*</span> Email
+                            </label>
                             <div className="col-sm-10">
+
                                 <input type="email"
                                     name="email"
                         
@@ -187,7 +186,9 @@ export default function CreateMerchant() {
                                     </div>
                                 </div>
                         <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Giờ đóng cửa</label>
+                            <label class="col-sm-2 col-form-label">
+                                <span className="warning">*</span> Giờ đóng cửa
+                            </label>
                             <div className="col-sm-10">
                                 <input type="time"
                                     name="timeEnd"
@@ -198,7 +199,9 @@ export default function CreateMerchant() {
                             </div>
                         </div> 
                         <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Ảnh</label>
+                            <label class="col-sm-2 col-form-label">
+                                <span className="warning">*</span> Ảnh
+                            </label>
                             <div className="col-sm-10">
                                 <input type="file" name="image"
                                     onChange={handleImageChange} class="form-control" id="image" />
