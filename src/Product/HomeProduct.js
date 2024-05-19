@@ -8,8 +8,14 @@ import { useEffect, useState } from "react";
 export default function HomeProduct() {
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [idShop,setIdShop] = useState(11);
+    const [idUser,setIdUser] = useState(2);
     
+    async function addProductToCart(idShop,idUser,idProduct,e){
 
+        const reponse = await axios.post(`http://localhost:8080/api/detailCart/${idUser}/${idShop}/${idProduct}`);
+        
+    }
     async function findByNameAndMenu(menuId, productName) {
         try {
             const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByName/${menuId}?productName=${productName}`);
@@ -22,7 +28,7 @@ export default function HomeProduct() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/menus/12`);
+            const response = await axios.get(`http://localhost:8080/api/menus/11`);
             const menus = response.data;
 
             const menuProductsPromises = menus.map(async (menu) => {
@@ -127,7 +133,7 @@ export default function HomeProduct() {
                                                         </div>
                                                     </div>
                                                     <div className='col-auto adding-food-cart txt-right'>
-                                                        <div className='btn-adding'>+</div>
+                                                        <div className='btn-adding'><button onClick={() =>  addProductToCart(idShop,idUser,product.id)}>+</button></div>
                                                     </div>
                                                 </div>
                                             </div>
