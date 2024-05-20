@@ -15,6 +15,16 @@ function FoodList() {
     const [searchQuery, setSearchQuery] = useState('');
     const params = useParams();
 
+    async function findByNameAndMenu(menuId, productName) {
+        try {
+            const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByName/${menuId}?productName=${productName}`);
+            return productResponse.data;
+        } catch (error) {
+            console.error('Error fetching product data:', error);
+            return [];
+        }
+    }
+
     const fetchData = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/menus/${params.id}`);
@@ -22,10 +32,10 @@ function FoodList() {
 
             const menuProductsPromises = menus.map(async (menu) => {
                 const menuId = menu.id;
-                const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByName/${menuId}?productName=${searchQuery}`);
+                const products = await findByNameAndMenu(menuId, searchQuery);
                 return {
                     menu: menu,
-                    products: productResponse.data
+                    products: products
                 };
             });
 
@@ -51,20 +61,15 @@ function FoodList() {
             <HeaderMerchant/>
             <div className="container">
 
-            <div className="container row mt-3">
-            <div className="col-xs-12 col-md-6 title">
+                <div className="container row mt-3">
+                    <div className="col-xs-12 col-md-6 title">
                         <Link className="btnSave" to={'/createFood'}>+ Thêm Sẩn Phẩm</Link>
-            </div>
-                
-                
-
+                    </div>
                     <form className="col-xs-12 col-md-6 right" onSubmit={handleSearch}>
                         <div className="input-group">
                             <input
                                 type="text"
-
                                 className="form-control "
-
                                 placeholder="Search..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -75,9 +80,10 @@ function FoodList() {
                         </div>
                     </form>
                 </div>
+
                 {menuProducts.map((menuProduct, index) => (
                     <div key={index}>
-                        {menuProduct.products.length > 0 && ( // Kiểm tra xem menu có sản phẩm hay không
+                        {menuProduct.products.length > 0 && (
                             <>
                                 <h3 style={{ textAlign: "center" }}>{menuProduct.menu.name}</h3>
                                 <table className="table table-image">
@@ -114,6 +120,7 @@ function FoodList() {
 
                     </div>
                 ))}
+               
             </div>
         </>
     );

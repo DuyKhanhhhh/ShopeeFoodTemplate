@@ -222,4 +222,7 @@ export default function CreateMerchant() {
             </div>
         </div>
     );
+
 }
+
+
