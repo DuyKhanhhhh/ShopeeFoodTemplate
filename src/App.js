@@ -1,7 +1,6 @@
 import HeadMerchant from './compoment/HeadMerchant';
 import CreateMerchant from './page/CreateMerchant';
 import UpdateMerchant from './page/UpdateMerchant';
-// import A from './page/A';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import CreateNewFood from './page/CreateNewFood';
 import FoodList from './page/FoodList';

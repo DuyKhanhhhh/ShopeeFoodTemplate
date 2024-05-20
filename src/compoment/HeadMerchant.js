@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 export default function HeadMerchant() {
     return (
         <div className='header'>
+
            <header class="header">
                 <div class="header_left">
                    <Link className='link' to={'/'}>
@@ -14,7 +15,6 @@ export default function HeadMerchant() {
                         <span class="ms-3">Marchant </span>
                     </Link>
                 </div>
-               
             </header>
         </div>
     )
