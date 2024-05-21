@@ -48,6 +48,10 @@ body {
     width: 30%;
     margin-left: 70%;
 }
+.container.row.mt-3{
+    margin-top: -1rem !important;
+    --bs-gutter-x: -0.5rem;
+}
 
 
 
