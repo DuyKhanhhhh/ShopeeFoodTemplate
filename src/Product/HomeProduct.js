@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import HeadHome from '../compoment/HeadHome'
+
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'; 
+import MyButton from '../page/MyButton';
 
 export default function HomeProduct() {
     const [menuProducts, setMenuProducts] = useState([]);
@@ -25,7 +27,7 @@ export default function HomeProduct() {
     const [sum, setSum] = useState(0);  // Initialize sum as a number
     
     async function getProduct() {
-        const response = await axios.get(`http://localhost:8080/api/shops/1`);
+        const response = await axios.get(`http://localhost:8080/api/shops/4`);
         setProduct(response.data);
         setName(response.data.name);
         setAddress(response.data.address);
@@ -39,7 +41,7 @@ export default function HomeProduct() {
     }
 
     async function getMenu() {
-        const response = await axios.get(`http://localhost:8080/api/menus/1`);
+        const response = await axios.get(`http://localhost:8080/api/menus/4`);
         console.log(response.data);
         setMenus(response.data);
     }
@@ -51,7 +53,7 @@ export default function HomeProduct() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/menus/1`);
+            const response = await axios.get(`http://localhost:8080/api/menus/4`);
             const menus = response.data;
 
             const menuProductsPromises = menus.map(async (menu) => {
@@ -87,7 +89,7 @@ export default function HomeProduct() {
 
     const Showcar = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/detailCart/1/1`);
+            const response = await axios.get(`http://localhost:8080/api/detailCart/4/3`);
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart data:', error);
@@ -96,8 +98,8 @@ export default function HomeProduct() {
 
     const addProductToCart = async (idShop, idUser, idProduct) => {
         try {
-            const response = await axios.post(`http://localhost:8080/api/detailCart/1/1/${idProduct}`);
-            console.log('Product added to cart:', response.data);
+            const response = await axios.post(`http://localhost:8080/api/detailCart/3/4/${idProduct}`);
+            console.log('Product added to cart:', response.data); 
             Showcar();
         } catch (error) {
             console.error('Error adding product to cart:', error);
@@ -153,13 +155,13 @@ export default function HomeProduct() {
                     <div className='row'>
                         <div className='col-5'>
                             <div className='detail-restaurant-img'>
-                                <img src='https://mms.img.susercontent.com/vn-11134513-7r98o-lsv8oqhuykzoa8@resize_ss640x400!@crop_w640_h400_cT' alt="restaurant"/>
+                                <img src={`http://localhost:8080/img/${image}`} alt={name} />
                             </div>
                         </div>
                         <div className='col'>
                             <div className='detail-restaurant-info'>
                                 <div className='kind-restaurant'>
-                                    <div className='tag-preferred'></div>
+                                    <div className='tag-preferred'>Yêu Thích</div>
                                     <span>Quán ăn</span>
                                 </div>
                                 <h1 className='name-restaurant'>{name}</h1>
@@ -249,6 +251,7 @@ export default function HomeProduct() {
                                                             <div className='col item-restaurant-info'>
                                                                 <h2 className='item-restaurant-name'>{product.name}</h2>
                                                                 <div className='item-restaurant-desc'>{product.detail}</div>
+                                                                <MyButton/>
                                                             </div>
                                                             <div className='col-auto item-restaurant-more'>
                                                                 <div className='row'>
@@ -259,7 +262,7 @@ export default function HomeProduct() {
                                                                         </div>
                                                                     </div>
                                                                     <div className='col-auto adding-food-cart txt-right'>
-                                                                        <div className='btn-adding'><button onClick={() => addProductToCart(idShop, idUser, product.id)}>+</button></div>
+                                                                        <button className='btn-adding' onClick={() => addProductToCart(idShop, idUser, product.id)}></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -278,25 +281,30 @@ export default function HomeProduct() {
                                 <div className='restaurant-cart'>
                                     {cart.map((item) => (
                                         <div key={item.id}>
-                                            <div className='item-cart col'>
-                                                <div>{item.product.name}</div>
-                                                <div className='inputQuantity'>
-                                                    <button className='btnQuantity' onClick={() => handleMinus(item.id)}>-</button>
-                                                    <input type="text" className='quantity-value' value={item.quantity} readOnly />
-                                                    <button className='btnQuantity' onClick={() => handlePlus(item.id)}>+</button>
+                                            <div className=''>
+                                                <div className='row'>
+                                                        <div className='col-5 name-cart'>{item.product.name}</div>
+                                                        <div className='inputQuantity col-3'>
+                                                            <button className='btnQuantity' onClick={() => handleMinus(item.id)}>-</button>
+                                                            <input type="text" className='quantity-value' value={item.quantity} readOnly />
+                                                            <button className='btnQuantity' onClick={() => handlePlus(item.id)}>+</button>
+                                                        </div>
+                                                        <div className='col-4 price-cart'>{item.product.price} đ</div>
+                                                    </div> 
+                                                    <hr/>
                                                 </div>
-                                                <div>{item.product.price} đ</div>
                                             </div>
-                                        </div>
+                                        
                                     ))}
                                 </div>
-                            </div>
-                            <div className='restaurant-checkout'>
-                                <div className='total-sum'>
-                                    Tổng: {sum} đ
+                                <div className='restaurant-checkout'>
+                                    <div className='restaurant-price'>
+                                        <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {sum} đ</span>
+                                    </div>
+                                    <button type='button'>Thanh Toán</button>
                                 </div>
-                                <button type='button'>Thanh Toán</button>
                             </div>
+                         
                         </div>
                     </div>
                 </div>

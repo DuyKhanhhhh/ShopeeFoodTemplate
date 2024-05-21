@@ -28,7 +28,7 @@ export default function HeadHome() {
                         <div className='header-content navbar row  justify-content-between align-items-center'>
                             <div className='logo-now col-auto'>
                                 <span>
-                                    <Link to={'/'}> <img className='img' src='https://shopeefood.vn/app/assets/img/shopeefoodvn.png?4aa1a38e8da801f4029b80734905f3f7'></img></Link>
+                                    <Link to={'/'}> <img className='imgLogo' src='https://shopeefood.vn/app/assets/img/shopeefoodvn.png?4aa1a38e8da801f4029b80734905f3f7'></img></Link>
                                 </span>
                             </div>
                             <div className='selectLocal col-auto'>
@@ -56,7 +56,7 @@ export default function HeadHome() {
                                         <div className='img'>
                                             <img src='https://cdn-icons-png.flaticon.com/512/1144/1144760.png'></img>
                                         </div>
-<span className='name'>User</span>
+<span className='name'>Người dùng</span>
                                     </div>
                                     <div className='dropdown-content'>
                                         <span><a class="dropdown-item" href="#">Lịch sử đơn hàng</a></span>

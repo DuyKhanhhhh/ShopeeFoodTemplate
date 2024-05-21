@@ -8,7 +8,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import HeaderMerchant from "../compoment/HeadMerchant.js";
 import Validation from "./Validate/ValidationFood.js";
-import { useNavigate } from "react-router-dom";
 
 
 function CreateNewFood() {
@@ -35,7 +34,7 @@ function handleValidation(event){
 }
   async function getListMenu() {
     try {
-      const response = await axios.get(`http://localhost:8080/menus`);
+      const response = await axios.get(`http://localhost:8080/api/menus`);
       setMenus(response.data);
     } catch (error) {
       console.error('Error fetching menus:', error);

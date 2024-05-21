@@ -110,6 +110,7 @@ function FoodList() {
                                                 <td>
                                                     <FontAwesomeIcon className="icon" icon={faTrash} />
                                                     <FontAwesomeIcon className="icon" icon={faPenSquare} />
+                                                    
                                                 </td>
                                             </tr>
                                         ))}
