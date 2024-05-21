@@ -389,3 +389,14 @@ padding: 6px 15px;
 .iconWallet{
     font-size: 18px;
 }
+
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #464646;
+}
+

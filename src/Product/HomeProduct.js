@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import HeadHome from '../compoment/HeadHome'
+
+import React, { useEffect, useState } from 'react';
+import HeadHome from '../compoment/HeadHome';
 
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import MyButton from '../page/MyButton';
-
+import { faSadTear } from '@fortawesome/free-regular-svg-icons';
 export default function HomeProduct() {
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,6 +26,7 @@ export default function HomeProduct() {
     const [selectedCategoryId, setSelectedCategoryId] = useState(1);
     const [menus, setMenus] = useState([]);
     const [sum, setSum] = useState(0);  // Initialize sum as a number
+    const [noResults, setNoResults] = useState(false); 
     
     async function getProduct() {
         const response = await axios.get(`http://localhost:8080/api/shops/4`);
@@ -67,6 +69,9 @@ export default function HomeProduct() {
 
             const menuProductsData = await Promise.all(menuProductsPromises);
             setMenuProducts(menuProductsData);
+
+            const hasProducts = menuProductsData.some(menuProduct => menuProduct.products.length > 0);
+            setNoResults(!hasProducts);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -98,7 +103,9 @@ export default function HomeProduct() {
 
     const addProductToCart = async (idShop, idUser, idProduct) => {
         try {
-            const response = await axios.post(`http://localhost:8080/api/detailCart/3/4/${idProduct}`);
+
+            const response = await axios.post(`http://localhost:8080/api/detailCart/1/1/${idProduct}`);
+
             console.log('Product added to cart:', response.data); 
             Showcar();
         } catch (error) {
@@ -230,12 +237,18 @@ export default function HomeProduct() {
                                 <div className='search-items mt-2'>
                                     <form className='input-group' onSubmit={handleSearch}>
                                         <input className='form-control' type='search' name="searchKey" placeholder="Tìm món" onChange={(e) => setSearchQuery(e.target.value)} />
-                                        <button type='button' className='btnSearch'>
+                                        <button type='submit' className='btnSearch'>
                                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                                         </button>
                                     </form>
                                 </div>
-                                {menuProducts.map((menuProduct, index) => (
+                                {noResults ? (
+                                      <div className="no-results">
+                                      <FontAwesomeIcon className='icon' icon={faSadTear} /> 
+                                      <div>Không có sản phẩm</div>
+                                    </div>
+                                ) : (
+                                menuProducts.map((menuProduct, index) => (
                                     <div key={index} className='memu-group'>
                                         {menuProduct.products.length > 0 && (
                                             <>
@@ -272,7 +285,7 @@ export default function HomeProduct() {
                                             </>
                                         )}
                                     </div>
-                                ))}
+                                )))}
                             </div>
                         </div>
                         <div className="col">
