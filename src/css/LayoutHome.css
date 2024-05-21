@@ -1,6 +1,6 @@
 .now-detail-restaurant{
     background-color: #fff;
-    padding-top: 30px;
+    padding-top: 48px;
 }
 .detail-restaurant-img{
     width: 480px;
@@ -143,12 +143,16 @@
     padding: 10px;
     text-decoration: none;
 }
-.menu-restaurant-category list-category item {
+.item {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 5px 0;
     padding: 2px 0;
+    display: flex;
+  flex-direction: column;
+
+    
 }
 .item-link {
     font-size: 13px;
@@ -264,6 +268,16 @@ padding: 6px 15px;
     color: #fff;
     display: inline-block;
     border-radius: 4px;
+    position: relative;
+    border: none;
+}
+
+.btn-adding:before {
+    content: "+";
+    top: 40%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 }
 .cart-restaurant{
     border: 1px solid #ebebeb;
@@ -281,7 +295,7 @@ padding: 6px 15px;
 }
 .restaurant-cart{
     border: 1px solid #ebebeb;
-    padding: 15px 5px 15px 15px;
+    padding: 5px;
     width: 100%;
     background: #ebebeb;
     border-radius: 4px;
@@ -299,15 +313,40 @@ padding: 6px 15px;
   }
   
 .btnQuantity {
+    margin-bottom: 3px;
     border: none;
-    height: 30px;
     width: 30px;
+    height: 30px;
     font-size: 20px;
     color: #3f3f3f;
     background-color: #f2f2f2;
     cursor: pointer;
+    height: auto;
 }
-  
+.btn-adding{
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 20px;
+    width: 22px;
+    height: 22px;
+    background-color: #ee4d2d;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+    border: none;
+}
+
+.btn-adding:before {
+    content: "+";
+    top: 40%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
 .quantity-value {
     width: 20px;
     text-align: center;
@@ -315,17 +354,47 @@ padding: 6px 15px;
     background-color: transparent;
 }
 .restaurant-checkout{
-   margin-top: 20px;
+   margin-top: 4px;
 }
 .restaurant-checkout button{
     margin-top: 10px;
-    border: 1px solid #18b104;
     font-size: 15px;
     padding: 10px;
     width: 100%;
     margin: 0 auto;
-    background: #18b104;
+    background: #7fef27;
     color: #fff;
     border-radius: 4px;
     font-weight: 700;
+    border: none;
+}
+.name-cart{
+    font-weight: 600;
+    font-size: 14px;
+}
+.price-cart{
+    color: #3f3f3f;
+    font-size: 14px;
+    display: flex;
+    align-items: center
+}
+.restaurant-price{
+    border: 1px solid #ebebeb;
+    background: #ebebeb;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.iconWallet{
+    font-size: 18px;
+}
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #464646;
 }

@@ -8,7 +8,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 import HeaderMerchant from "../compoment/HeadMerchant.js";
 import Validation from "./Validate/ValidationFood.js";
-import { useNavigate } from "react-router-dom";
 
 
 function CreateNewFood() {
