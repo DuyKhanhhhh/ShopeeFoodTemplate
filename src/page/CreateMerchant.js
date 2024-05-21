@@ -148,7 +148,7 @@ export default function CreateMerchant() {
                         </div>
                         <div className="row mb-3">
                             <label className="col-sm-2 col-form-label"><span className='warning'>*</span>  Thành phố</label>
-                            <div className="col-md-9 pe-5">
+                            <div className="col-md-10">
                                 <select className="form-select"
                                     onChange={handleCityChange}
                                     value={selectedCityId}>

@@ -2,7 +2,9 @@
 export default function Validation(values) {
     const errors = {};
     const email_pattern = /^\S+@\S+\.\S{2,6}$/;
-    const name_pattern = /^[a-zA-Z\s]+$/;
+    const name_pattern = /^[\p{L}\s\d\-]+$/u;
+
+
 
 
 
