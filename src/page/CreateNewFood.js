@@ -34,7 +34,7 @@ function handleValidation(event){
 }
   async function getListMenu() {
     try {
-      const response = await axios.get(`http://localhost:8080/menus`);
+      const response = await axios.get(`http://localhost:8080/api/menus`);
       setMenus(response.data);
     } catch (error) {
       console.error('Error fetching menus:', error);

@@ -1,12 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
 import HeadHome from '../compoment/HeadHome';
+
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import MyButton from '../page/MyButton';
 import { faSadTear } from '@fortawesome/free-regular-svg-icons';
-
 export default function HomeProduct() {
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -28,7 +29,7 @@ export default function HomeProduct() {
     const [noResults, setNoResults] = useState(false); 
     
     async function getProduct() {
-        const response = await axios.get(`http://localhost:8080/api/shops/1`);
+        const response = await axios.get(`http://localhost:8080/api/shops/4`);
         setProduct(response.data);
         setName(response.data.name);
         setAddress(response.data.address);
@@ -42,7 +43,7 @@ export default function HomeProduct() {
     }
 
     async function getMenu() {
-        const response = await axios.get(`http://localhost:8080/api/menus/1`);
+        const response = await axios.get(`http://localhost:8080/api/menus/4`);
         console.log(response.data);
         setMenus(response.data);
     }
@@ -54,7 +55,7 @@ export default function HomeProduct() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/menus/1`);
+            const response = await axios.get(`http://localhost:8080/api/menus/4`);
             const menus = response.data;
 
             const menuProductsPromises = menus.map(async (menu) => {
@@ -93,7 +94,7 @@ export default function HomeProduct() {
 
     const Showcar = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/detailCart/1/1`);
+            const response = await axios.get(`http://localhost:8080/api/detailCart/4/3`);
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart data:', error);
@@ -102,7 +103,9 @@ export default function HomeProduct() {
 
     const addProductToCart = async (idShop, idUser, idProduct) => {
         try {
+
             const response = await axios.post(`http://localhost:8080/api/detailCart/1/1/${idProduct}`);
+
             console.log('Product added to cart:', response.data); 
             Showcar();
         } catch (error) {

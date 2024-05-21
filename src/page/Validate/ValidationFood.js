@@ -2,7 +2,9 @@ export default function Validation(values) {
     const errors = {};
 
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}$/;
-    const name_pattern = /^[a-zA-Z\s]+$/;
+    const name_pattern = /^[\p{L}\s\d\-]+$/u;
+
+
     const price_pattern = /^\d+(\.\d{1,2})?$/;
     const quantity_pattern = /^[1-9]\d+$/;
     const detail_pattern = /.*/;
