@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import MyButton from '../page/MyButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomeProduct() {
+    const navigater = useNavigate()
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [idShop, setIdShop] = useState(1);
@@ -27,7 +29,7 @@ export default function HomeProduct() {
     const [sum, setSum] = useState(0);  // Initialize sum as a number
     
     async function getProduct() {
-        const response = await axios.get(`http://localhost:8080/api/shops/4`);
+        const response = await axios.get(`http://localhost:8080/api/shops/1`);
         setProduct(response.data);
         setName(response.data.name);
         setAddress(response.data.address);
@@ -39,9 +41,20 @@ export default function HomeProduct() {
         setSelectedCityId(response.data.idCity);
         setSelectedCategoryId(response.data.idCategory);
     }
+    async function CreateOrder() {
+        try {
+            const orderResponse = await axios.post(`http://localhost:8080/api/order/1/1`);
+            console.log('đặt hàng thành công', orderResponse.data);
+            navigater(`/HomeProduct`)
+        } catch (error) {
+            console.error('Error fetching order data:', error);
+            return [];
+        }
 
+  
+    }
     async function getMenu() {
-        const response = await axios.get(`http://localhost:8080/api/menus/4`);
+        const response = await axios.get(`http://localhost:8080/api/menus/1`);
         console.log(response.data);
         setMenus(response.data);
     }
@@ -53,7 +66,7 @@ export default function HomeProduct() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/menus/4`);
+            const response = await axios.get(`http://localhost:8080/api/menus/1`);
             const menus = response.data;
 
             const menuProductsPromises = menus.map(async (menu) => {
@@ -89,7 +102,7 @@ export default function HomeProduct() {
 
     const Showcar = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/detailCart/4/3`);
+            const response = await axios.get(`http://localhost:8080/api/detailCart/1/1`);
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart data:', error);
@@ -98,7 +111,7 @@ export default function HomeProduct() {
 
     const addProductToCart = async (idShop, idUser, idProduct) => {
         try {
-            const response = await axios.post(`http://localhost:8080/api/detailCart/3/4/${idProduct}`);
+            const response = await axios.post(`http://localhost:8080/api/detailCart/1/1/${idProduct}`);
             console.log('Product added to cart:', response.data); 
             Showcar();
         } catch (error) {
@@ -301,7 +314,9 @@ export default function HomeProduct() {
                                     <div className='restaurant-price'>
                                         <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {sum} đ</span>
                                     </div>
-                                    <button type='button'>Thanh Toán</button>
+                                    <form onSubmit={CreateOrder}>
+                                        <button type='submit'>Thanh Toán</button>
+                                    </form>
                                 </div>
                             </div>
                          
