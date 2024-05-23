@@ -10,7 +10,7 @@ export default function CreateNewFood() {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [menus, setMenus] = useState([]);
-    const [selectedMenuId, setSelectedMenuId] = useState(1); // Default to the first menu
+    const [selectedMenuId, setSelectedMenuId] = useState(null); // Sửa lại để không có giá trị mặc định
     const [values, setValues] = useState({
         name: '',
         price: '',
@@ -22,7 +22,15 @@ export default function CreateNewFood() {
     async function getListMenu() {
         try {
             const response = await axios.get(`http://localhost:8080/api/menus/${params.id}`);
-            setMenus(response.data);
+            const menuData = response.data;
+            // Nếu danh sách menu rỗng, thêm menu mặc định
+            if (menuData.length === 0) {
+                setMenus([{ id: 1, name: "Menu mặc định" }]);
+                setSelectedMenuId(1); // Đặt menu mặc định là menu đầu tiên
+            } else {
+                setMenus(menuData);
+                setSelectedMenuId(menuData[0].id); // Chọn menu đầu tiên nếu có
+            }
         } catch (error) {
             console.error('Error fetching menus:', error);
         }
@@ -129,7 +137,7 @@ export default function CreateNewFood() {
                                 <select
                                     className="form-select"
                                     onChange={handleMenuChange}
-                                    value={selectedMenuId}
+                                    value={selectedMenuId || ''}
                                 >
                                     {menus.map((menu) => (
                                         <option key={menu.id} value={menu.id}>

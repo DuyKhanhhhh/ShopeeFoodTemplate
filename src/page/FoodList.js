@@ -5,24 +5,24 @@ import '../css/LayoutMarchant.css';
 import '../css/cs.css';
 import '../css/table.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTrash, faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faTrash, faPenSquare, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import HeaderMerchant from "../compoment/HeadMerchant.js";
 import { Link } from "react-router-dom";
 
 function FoodList() {
     const [products, setProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [page, setPage] = useState(0); // Add state for current page
-    const [totalPages, setTotalPages] = useState(1); // Add state for total pages
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(6);
     const params = useParams();
 
-    async function findByNameAndMenu(menuId, productName, page) {
+    async function findByNameAndMenu(menuId, productName) {
         try {
-            const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByNameAndPage/${menuId}?productName=${productName}&page=${page}&size=6`);
+            const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByName/${menuId}?productName=${productName}`);
             return productResponse.data;
         } catch (error) {
             console.error('Error fetching product data:', error);
-            return { content: [], totalPages: 1 };
+            return [];
         }
     }
 
@@ -30,14 +30,16 @@ function FoodList() {
         try {
             const response = await axios.get(`http://localhost:8080/api/menus/${params.id}`);
             const menus = response.data;
-    
-            // Giả sử bạn chỉ xử lý menu đầu tiên cho đơn giản
-            if (menus.length > 0) {
-                const menuId = menus[0].id; // Sử dụng ID của menu đầu tiên hoặc điều chỉnh nếu cần
-                const productsPage = await findByNameAndMenu(menuId, searchQuery, page);
-                setProducts(productsPage.content);
-                setTotalPages(productsPage.totalPages);
+
+            let allProducts = [];
+
+            for (const menu of menus) {
+                const menuId = menu.id;
+                const products = await findByNameAndMenu(menuId, searchQuery);
+                allProducts = [...allProducts, ...products];
             }
+
+            setProducts(allProducts);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -45,25 +47,31 @@ function FoodList() {
 
     useEffect(() => {
         fetchData();
-    }, [params.id, searchQuery, page]);
+    }, [params.id, searchQuery]);
 
-    const handleSearch = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
-        setPage(0); // Đặt lại về trang đầu tiên khi tìm kiếm mới được khởi đầu
-        fetchData();
+        await fetchData(); // Chờ fetchData hoàn thành trước khi tiếp tục
     };
 
-    const handlePageChange = (newPage) => {
-        if (newPage >= 0 && newPage < totalPages) {
-            setPage(newPage);
-        }
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const nextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prevPage = () => {
+        setCurrentPage(currentPage - 1);
     };
 
     return (
         <>
             <HeaderMerchant />
             <div className="container">
-
                 <div className="container row mt-3">
                     <div className="col-xs-12 col-md-6 title">
                         <Link className="btnSave" to={`/createFood/${params.id}`}>+ Thêm Sản Phẩm</Link>
@@ -84,7 +92,7 @@ function FoodList() {
                     </form>
                 </div>
 
-                {products.length > 0 && (
+                {currentProducts.length > 0 && (
                     <table className="table table-image">
                         <thead>
                             <tr>
@@ -97,7 +105,7 @@ function FoodList() {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((product, index) => (
+                            {currentProducts.map((product, index) => (
                                 <tr key={index}>
                                     <td>{product.name}</td>
                                     <td>{product.price} VND</td>
@@ -114,21 +122,26 @@ function FoodList() {
                     </table>
                 )}
 
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-right">
-                        <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => handlePageChange(page - 1)}>Previous</button>
+                {/* Pagination */}
+                <ul className="pagination">
+                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                        <button onClick={prevPage} className="page-link">
+                            <FontAwesomeIcon icon={faArrowLeft} />
+                        </button>
+                    </li>
+                    {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => (
+                        <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                            <button onClick={() => paginate(i + 1)} className="page-link">
+                                {i + 1}
+                            </button>
                         </li>
-                        {Array.from({ length: totalPages }, (_, i) => (
-                            <li key={i} className={`page-item ${i === page ? 'active' : ''}`}>
-                                <button className="page-link" onClick={() => handlePageChange(i)}>{i + 1}</button>
-                            </li>
-                        ))}
-                        <li className={`page-item ${page + 1 === totalPages ? 'disabled' : ''}`}>
-                            <button className="page-link" onClick={() => handlePageChange(page + 1)}>Next</button>
-                        </li>
-                    </ul>
-                </nav>
+                    ))}
+                    <li className={`page-item ${currentPage === Math.ceil(products.length / productsPerPage) ? 'disabled' : ''}`}>
+                        <button onClick={nextPage} className="page-link">
+                            <FontAwesomeIcon icon={faArrowRight} />
+                        </button>
+                    </li>
+                </ul>
             </div>
         </>
     );
