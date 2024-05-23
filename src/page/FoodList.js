@@ -18,7 +18,7 @@ function FoodList() {
 
     async function findByNameAndMenu(menuId, productName, page) {
         try {
-            const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByNameAndPage/${menuId}?productName=${productName}&page=${page}&size=3`);
+            const productResponse = await axios.get(`http://localhost:8080/api/products/FindByPByNameAndPage/${menuId}?productName=${productName}&page=${page}&size=6`);
             return productResponse.data;
         } catch (error) {
             console.error('Error fetching product data:', error);
@@ -30,20 +30,13 @@ function FoodList() {
         try {
             const response = await axios.get(`http://localhost:8080/api/menus/${params.id}`);
             const menus = response.data;
-
-            const allProductsPromises = menus.map(async (menu) => {
-                const menuId = menu.id;
+    
+            // Giả sử bạn chỉ xử lý menu đầu tiên cho đơn giản
+            if (menus.length > 0) {
+                const menuId = menus[0].id; // Sử dụng ID của menu đầu tiên hoặc điều chỉnh nếu cần
                 const productsPage = await findByNameAndMenu(menuId, searchQuery, page);
-                return productsPage;
-            });
-
-            const allProductsPages = await Promise.all(allProductsPromises);
-            const allProducts = allProductsPages.flatMap(productsPage => productsPage.content);
-            setProducts(allProducts);
-
-            // Assuming all pages have the same totalPages
-            if (allProductsPages.length > 0) {
-                setTotalPages(allProductsPages[0].totalPages);
+                setProducts(productsPage.content);
+                setTotalPages(productsPage.totalPages);
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -56,7 +49,7 @@ function FoodList() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        setPage(0); // Reset to first page on new search
+        setPage(0); // Đặt lại về trang đầu tiên khi tìm kiếm mới được khởi đầu
         fetchData();
     };
 
@@ -73,7 +66,7 @@ function FoodList() {
 
                 <div className="container row mt-3">
                     <div className="col-xs-12 col-md-6 title">
-                        <Link className="btnSave" to={'/createFood'}>+ Thêm Sản Phẩm</Link>
+                        <Link className="btnSave" to={`/createFood/${params.id}`}>+ Thêm Sản Phẩm</Link>
                     </div>
                     <form className="col-xs-12 col-md-6 right" onSubmit={handleSearch}>
                         <div className="input-group">
@@ -95,7 +88,6 @@ function FoodList() {
                     <table className="table table-image">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Tên</th>
                                 <th scope="col">Giá</th>
                                 <th scope="col">Ảnh</th>
@@ -107,7 +99,6 @@ function FoodList() {
                         <tbody>
                             {products.map((product, index) => (
                                 <tr key={index}>
-                                    <th scope="row">{index + 1}</th>
                                     <td>{product.name}</td>
                                     <td>{product.price} VND</td>
                                     <td><img className='image' src={`http://localhost:8080/img/${product.image}`} alt="" /></td>
