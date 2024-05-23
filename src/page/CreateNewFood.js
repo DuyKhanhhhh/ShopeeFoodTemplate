@@ -31,11 +31,11 @@ export default function CreateNewFood() {
     useEffect(() => {
         getListMenu();
     }, []);
-
     function handleInput(event) {
         const { name, value } = event.target;
         setValues({ ...values, [name]: value });
         setErrors({ ...errors, [name]: '' });
+
     }
 
     function handleMenuChange(e) {
