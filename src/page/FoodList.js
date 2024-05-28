@@ -44,6 +44,9 @@ function FoodList() {
             console.error('Error fetching data:', error);
         }
     };
+    function formatNumberWithCommas(number) {
+        return number.toLocaleString('de-DE');
+    }
 
     useEffect(() => {
         fetchData();
@@ -51,7 +54,8 @@ function FoodList() {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        await fetchData(); // Chờ fetchData hoàn thành trước khi tiếp tục
+        await fetchData();
+
     };
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -66,6 +70,16 @@ function FoodList() {
 
     const prevPage = () => {
         setCurrentPage(currentPage - 1);
+    };
+
+    const handleStatusChange = async (id, newStatus) => {
+        try {
+            await axios.put(`http://localhost:8080/api/products/${id}`, { status: newStatus });
+            setProducts(products.map(product => product.id === id ? { ...product, status: newStatus } : product));
+        } catch (error) {
+            console.error('Error updating product status:', error);
+        }
+
     };
 
     return (
@@ -102,13 +116,14 @@ function FoodList() {
                                 <th scope="col">Số lượng món ăn</th>
                                 <th scope="col">Chi tiết</th>
                                 <th scope="col">Công cụ</th>
+                                <th scope="col">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentProducts.map((product, index) => (
                                 <tr key={index}>
                                     <td>{product.name}</td>
-                                    <td>{product.price} VND</td>
+                                    <td>{formatNumberWithCommas(product.price)} VND</td>
                                     <td><img className='image' src={`http://localhost:8080/img/${product.image}`} alt="" /></td>
                                     <td>{product.quantity} sản phẩm</td>
                                     <td>{product.detail}</td>
@@ -116,10 +131,25 @@ function FoodList() {
                                         <FontAwesomeIcon className="icon" icon={faTrash} />
                                         <FontAwesomeIcon className="icon" icon={faPenSquare} />
                                     </td>
+                                    <td>
+                                        <div className="centered-cell">
+                                            <div className="form-check form-switch">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    role="switch"
+                                                    id={`flexSwitchCheckDefault-${product.id}`}
+                                                    checked={product.status === 1}
+                                                    onChange={(e) => handleStatusChange(product.id, e.target.checked ? 1 : 0)}
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             ))}
-                        </tbody>
+                            </tbody>
                     </table>
+
                 )}
 
                 {/* Pagination */}

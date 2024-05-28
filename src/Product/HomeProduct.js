@@ -4,11 +4,16 @@ import HeadHome from '../compoment/HeadHome';
 
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSadTear, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import MyButton from '../page/MyButton';
-import { faSadTear } from '@fortawesome/free-regular-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import FooterHome from '../compoment/FooterHome';
+
+
 export default function HomeProduct() {
+    const [noResults, setNoResults] = useState(false);
+    const navigater = useNavigate()
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [idShop, setIdShop] = useState(1);
@@ -29,7 +34,7 @@ export default function HomeProduct() {
     const [noResults, setNoResults] = useState(false); 
     
     async function getProduct() {
-        const response = await axios.get(`http://localhost:8080/api/shops/4`);
+        const response = await axios.get(`http://localhost:8080/api/shops/1`);
         setProduct(response.data);
         setName(response.data.name);
         setAddress(response.data.address);
@@ -40,10 +45,25 @@ export default function HomeProduct() {
         setTimeEnd(response.data.timeEnd);
         setSelectedCityId(response.data.idCity);
         setSelectedCategoryId(response.data.idCategory);
+        console.log(response.data);
     }
+    function formatNumberWithCommas(number) {
+        return number.toLocaleString('de-DE');
+    }
+    async function CreateOrder() {
+        try {
+            const orderResponse = await axios.post(`http://localhost:8080/api/order/1/1`);
+            console.log('đặt hàng thành công', orderResponse.data);
+            navigater(`/HomeProduct`)
+        } catch (error) {
+            console.error('Error fetching order data:', error);
+            return [];
+        }
 
+  
+    }
     async function getMenu() {
-        const response = await axios.get(`http://localhost:8080/api/menus/4`);
+        const response = await axios.get(`http://localhost:8080/api/menus/1`);
         console.log(response.data);
         setMenus(response.data);
     }
@@ -55,7 +75,7 @@ export default function HomeProduct() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/menus/4`);
+            const response = await axios.get(`http://localhost:8080/api/menus/1`);
             const menus = response.data;
 
             const menuProductsPromises = menus.map(async (menu) => {
@@ -94,7 +114,7 @@ export default function HomeProduct() {
 
     const Showcar = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/detailCart/4/3`);
+            const response = await axios.get(`http://localhost:8080/api/detailCart/1/1`);
             setCart(response.data);
         } catch (error) {
             console.error('Error fetching cart data:', error);
@@ -103,9 +123,7 @@ export default function HomeProduct() {
 
     const addProductToCart = async (idShop, idUser, idProduct) => {
         try {
-
             const response = await axios.post(`http://localhost:8080/api/detailCart/1/1/${idProduct}`);
-
             console.log('Product added to cart:', response.data); 
             Showcar();
         } catch (error) {
@@ -117,6 +135,7 @@ export default function HomeProduct() {
         try {
             await axios.put(`http://localhost:8080/api/detailCart/minus/${id}`);
             Showcar();
+            // window.location.reload(); 
         } catch (error) {
             if (error.response && error.response.status === 204) {
                 Showcar(); // Refresh the cart
@@ -243,6 +262,7 @@ export default function HomeProduct() {
                                     </form>
                                 </div>
                                 {noResults ? (
+
                                       <div className="no-results">
                                       <FontAwesomeIcon className='icon' icon={faSadTear} /> 
                                       <div>Không có sản phẩm</div>
@@ -302,7 +322,7 @@ export default function HomeProduct() {
                                                             <input type="text" className='quantity-value' value={item.quantity} readOnly />
                                                             <button className='btnQuantity' onClick={() => handlePlus(item.id)}>+</button>
                                                         </div>
-                                                        <div className='col-4 price-cart'>{item.product.price} đ</div>
+                                                    <div className='col-4 price-cart'>{formatNumberWithCommas(item.product.price)} đ</div>
                                                     </div> 
                                                     <hr/>
                                                 </div>
@@ -312,9 +332,11 @@ export default function HomeProduct() {
                                 </div>
                                 <div className='restaurant-checkout'>
                                     <div className='restaurant-price'>
-                                        <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {sum} đ</span>
+                                        <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {formatNumberWithCommas(sum)} đ</span>
                                     </div>
-                                    <button type='button'>Thanh Toán</button>
+                                    <form onSubmit={CreateOrder}>
+                                        <button type='submit'>Thanh Toán</button>
+                                    </form>
                                 </div>
                             </div>
                          
@@ -322,6 +344,8 @@ export default function HomeProduct() {
                     </div>
                 </div>
             </div>
+            <FooterHome/>
         </div>
+     
     );
 }
