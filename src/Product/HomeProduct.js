@@ -3,12 +3,14 @@ import HeadHome from '../compoment/HeadHome'
 
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSadTear, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import MyButton from '../page/MyButton';
 import { useNavigate } from 'react-router-dom';
+import FooterHome from '../compoment/FooterHome';
 
 export default function HomeProduct() {
+    const [noResults, setNoResults] = useState(false);
     const navigater = useNavigate()
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -40,6 +42,10 @@ export default function HomeProduct() {
         setTimeEnd(response.data.timeEnd);
         setSelectedCityId(response.data.idCity);
         setSelectedCategoryId(response.data.idCategory);
+        console.log(response.data);
+    }
+    function formatNumberWithCommas(number) {
+        return number.toLocaleString('de-DE');
     }
     async function CreateOrder() {
         try {
@@ -80,6 +86,9 @@ export default function HomeProduct() {
 
             const menuProductsData = await Promise.all(menuProductsPromises);
             setMenuProducts(menuProductsData);
+
+            const hasProducts = menuProductsData.some(menuProduct => menuProduct.products.length > 0);
+            setNoResults(!hasProducts);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -123,6 +132,7 @@ export default function HomeProduct() {
         try {
             await axios.put(`http://localhost:8080/api/detailCart/minus/${id}`);
             Showcar();
+            // window.location.reload(); 
         } catch (error) {
             if (error.response && error.response.status === 204) {
                 Showcar(); // Refresh the cart
@@ -243,49 +253,65 @@ export default function HomeProduct() {
                                 <div className='search-items mt-2'>
                                     <form className='input-group' onSubmit={handleSearch}>
                                         <input className='form-control' type='search' name="searchKey" placeholder="Tìm món" onChange={(e) => setSearchQuery(e.target.value)} />
-                                        <button type='button' className='btnSearch'>
+                                        <button type='submit' className='btnSearch'>
                                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                                         </button>
                                     </form>
                                 </div>
-                                {menuProducts.map((menuProduct, index) => (
-                                    <div key={index} className='memu-group'>
-                                        {menuProduct.products.length > 0 && (
-                                            <>
-                                                <div className='title-menu'>
-                                                    {menuProduct.menu.name}
-                                                </div>
-                                                {menuProduct.products.map((product, index) => (
-                                                    <div key={index} className='item-restaurant-row'>
-                                                        <div className='row'>
-                                                            <div className='col-auto item-restaurant-img'>
-                                                                <img className='img-item' src={`http://localhost:8080/img/${product.image}`} alt={product.name} />
-                                                            </div>
-                                                            <div className='col item-restaurant-info'>
-                                                                <h2 className='item-restaurant-name'>{product.name}</h2>
-                                                                <div className='item-restaurant-desc'>{product.detail}</div>
-                                                                <MyButton/>
-                                                            </div>
-                                                            <div className='col-auto item-restaurant-more'>
-                                                                <div className='row'>
-                                                                    <div className='col-auto product-price'>
-                                                                        <div className='current-price'>
-                                                                            {product.price}
-                                                                            <span className='price'>đ</span>
+                                {noResults ? (
+                                    <div className="no-results">
+                                        <FontAwesomeIcon className='icon' icon={faSadTear} />
+                                        <div>Không có sản phẩm</div>
+                                    </div>
+                                ) : (
+                                    menuProducts.map((menuProduct, index) => {
+                                        return (
+                                            <div key={index} className='memu-group'>
+                                                {menuProduct.products.length > 0 && (
+                                                    <>
+                                                        <div className='title-menu'>
+                                                            {menuProduct.menu.name}
+                                                        </div>
+                                                        {menuProduct.products.map((product, index) => {
+                                                            if (product.status === 1) {
+                                                                return (
+                                                                    <div key={index} className='item-restaurant-row'>
+                                                                        <div className='row'>
+                                                                            <div className='col-auto item-restaurant-img'>
+                                                                                <img className='img-item' src={`http://localhost:8080/img/${product.image}`} alt={product.name} />
+                                                                            </div>
+                                                                            <div className='col item-restaurant-info'>
+                                                                                <h2 className='item-restaurant-name'>{product.name}</h2>
+                                                                                <div className='item-restaurant-desc'>{product.detail}</div>
+                                                                                {/* <div>{product.like_product}</div> */}
+                                                                                {/* <LikeButton productId={product.id} initialLiked={product.liked} /> */}
+                                                                            </div>
+                                                                            <div className='col-auto item-restaurant-more'>
+                                                                                <div className='row'>
+                                                                                    <div className='col-auto product-price'>
+                                                                                        <div className='current-price'>
+                                                                                            {formatNumberWithCommas(product.price)}
+                                                                                            <span className='price'>đ</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div className='col-auto adding-food-cart txt-right'>
+                                                                                        <button className='btn-adding' onClick={() => addProductToCart(idShop, idUser, product.id)}></button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div className='col-auto adding-food-cart txt-right'>
-                                                                        <button className='btn-adding' onClick={() => addProductToCart(idShop, idUser, product.id)}></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </>
-                                        )}
-                                    </div>
-                                ))}
+                                                                );
+                                                            } else {
+                                                                return null;
+                                                            }
+                                                        })}
+                                                    </>
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                )}
                             </div>
                         </div>
                         <div className="col">
@@ -302,7 +328,7 @@ export default function HomeProduct() {
                                                             <input type="text" className='quantity-value' value={item.quantity} readOnly />
                                                             <button className='btnQuantity' onClick={() => handlePlus(item.id)}>+</button>
                                                         </div>
-                                                        <div className='col-4 price-cart'>{item.product.price} đ</div>
+                                                    <div className='col-4 price-cart'>{formatNumberWithCommas(item.product.price)} đ</div>
                                                     </div> 
                                                     <hr/>
                                                 </div>
@@ -312,7 +338,7 @@ export default function HomeProduct() {
                                 </div>
                                 <div className='restaurant-checkout'>
                                     <div className='restaurant-price'>
-                                        <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {sum} đ</span>
+                                        <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {formatNumberWithCommas(sum)} đ</span>
                                     </div>
                                     <form onSubmit={CreateOrder}>
                                         <button type='submit'>Thanh Toán</button>
@@ -324,6 +350,8 @@ export default function HomeProduct() {
                     </div>
                 </div>
             </div>
+            <FooterHome/>
         </div>
+     
     );
 }

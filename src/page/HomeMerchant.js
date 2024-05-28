@@ -3,6 +3,9 @@ import HeadMerchant from '../compoment/HeadMerchant'
 import '../css/LayoutMarchant.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock, faMagnifyingGlass, faSackDollar, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+
 export default function HomeMerchant() {
     const [shop, setShop] = useState([]);
     useEffect(() => {
@@ -30,7 +33,7 @@ export default function HomeMerchant() {
                     {shop.map(item => (
                         <div className='carShop'>
 
-                            <Link to={`/foodList/${item.id}`}>
+                            <Link to={`/detailShop/${item.id}`}>
                                 <img className='image' src={`http://localhost:8080/img/${item.image}`} alt="" />
                             </Link>
                             <div className='carShopBody'>
@@ -38,18 +41,19 @@ export default function HomeMerchant() {
                                     <span className='carShopNameText'>{item.name}</span>
                                 </div>
                                 <div className='carShopInfor'>
-                                    <span className='carShopTitleText'>Địa Chỉ: {item.idCity.name} </span>
-                                    <span className='carShopTitleText'>Sản Phẩm: {item.idCategory.name} </span>
-                                    <span className='carShopTitleText'>Giờ Mở Cửa: {item.timeStart} </span>
-                                    <span className='carShopTitleText'>Giờ Đóng Cửa: {item.timeEnd}</span>
+                                    <span className='carShopTitleText'><FontAwesomeIcon icon={faLocationDot} /> {item.idCity.name} </span>
                                 </div>
-                                <Link to={`updateShop/${item.id}`} className='carShopAction '>Sửa</Link>
+                                <div className='carShopInfor'>
+                                    {/* <span className='carShopTitleText'>Sản Phẩm: {item.idCategory.name} </span> */}
+                                    <span className='carShopTitleText'><FontAwesomeIcon icon={faClock} /> {item.timeStart} : {item.timeEnd}</span>
+                                </div>
+                                {/* <Link to={`updateShop/${item.id}`} className='carShopAction '>Sửa</Link> */}
                             </div>
                         </div>
                     ))}
 
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
