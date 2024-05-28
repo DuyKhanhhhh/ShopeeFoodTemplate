@@ -13,7 +13,7 @@ function FoodList() {
     const [products, setProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(4);
+    const [productsPerPage] = useState(6);
     const params = useParams();
 
     async function findByNameAndMenu(menuId, productName) {
@@ -55,6 +55,7 @@ function FoodList() {
     const handleSearch = async (e) => {
         e.preventDefault();
         await fetchData();
+
     };
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -78,6 +79,7 @@ function FoodList() {
         } catch (error) {
             console.error('Error updating product status:', error);
         }
+
     };
 
     return (

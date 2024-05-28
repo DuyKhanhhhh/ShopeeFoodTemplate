@@ -447,3 +447,56 @@
                     text-align: center;
                     color: #464646;
                 }
+.quantity-value {
+    width: 20px;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+}
+.restaurant-checkout{
+   margin-top: 4px;
+}
+.restaurant-checkout button{
+    margin-top: 10px;
+    font-size: 15px;
+    padding: 10px;
+    width: 100%;
+    margin: 0 auto;
+    background: #7fef27;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 700;
+    border: none;
+}
+.name-cart{
+    font-weight: 600;
+    font-size: 14px;
+}
+.price-cart{
+    color: #3f3f3f;
+    font-size: 14px;
+    display: flex;
+    align-items: center
+}
+.restaurant-price{
+    border: 1px solid #ebebeb;
+    background: #ebebeb;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.iconWallet{
+    font-size: 18px;
+}
+
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #464646;
+}
+

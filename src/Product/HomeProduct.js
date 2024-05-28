@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import HeadHome from '../compoment/HeadHome'
+
+import React, { useEffect, useState } from 'react';
+import HeadHome from '../compoment/HeadHome';
 
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,7 @@ import axios from 'axios';
 import MyButton from '../page/MyButton';
 import { useNavigate } from 'react-router-dom';
 import FooterHome from '../compoment/FooterHome';
+
 
 export default function HomeProduct() {
     const [noResults, setNoResults] = useState(false);
@@ -29,6 +31,7 @@ export default function HomeProduct() {
     const [selectedCategoryId, setSelectedCategoryId] = useState(1);
     const [menus, setMenus] = useState([]);
     const [sum, setSum] = useState(0);  // Initialize sum as a number
+    const [noResults, setNoResults] = useState(false); 
     
     async function getProduct() {
         const response = await axios.get(`http://localhost:8080/api/shops/1`);
@@ -259,59 +262,50 @@ export default function HomeProduct() {
                                     </form>
                                 </div>
                                 {noResults ? (
-                                    <div className="no-results">
-                                        <FontAwesomeIcon className='icon' icon={faSadTear} />
-                                        <div>Không có sản phẩm</div>
+
+                                      <div className="no-results">
+                                      <FontAwesomeIcon className='icon' icon={faSadTear} /> 
+                                      <div>Không có sản phẩm</div>
                                     </div>
                                 ) : (
-                                    menuProducts.map((menuProduct, index) => {
-                                        return (
-                                            <div key={index} className='memu-group'>
-                                                {menuProduct.products.length > 0 && (
-                                                    <>
-                                                        <div className='title-menu'>
-                                                            {menuProduct.menu.name}
-                                                        </div>
-                                                        {menuProduct.products.map((product, index) => {
-                                                            if (product.status === 1) {
-                                                                return (
-                                                                    <div key={index} className='item-restaurant-row'>
-                                                                        <div className='row'>
-                                                                            <div className='col-auto item-restaurant-img'>
-                                                                                <img className='img-item' src={`http://localhost:8080/img/${product.image}`} alt={product.name} />
-                                                                            </div>
-                                                                            <div className='col item-restaurant-info'>
-                                                                                <h2 className='item-restaurant-name'>{product.name}</h2>
-                                                                                <div className='item-restaurant-desc'>{product.detail}</div>
-                                                                                {/* <div>{product.like_product}</div> */}
-                                                                                {/* <LikeButton productId={product.id} initialLiked={product.liked} /> */}
-                                                                            </div>
-                                                                            <div className='col-auto item-restaurant-more'>
-                                                                                <div className='row'>
-                                                                                    <div className='col-auto product-price'>
-                                                                                        <div className='current-price'>
-                                                                                            {formatNumberWithCommas(product.price)}
-                                                                                            <span className='price'>đ</span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div className='col-auto adding-food-cart txt-right'>
-                                                                                        <button className='btn-adding' onClick={() => addProductToCart(idShop, idUser, product.id)}></button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                menuProducts.map((menuProduct, index) => (
+                                    <div key={index} className='memu-group'>
+                                        {menuProduct.products.length > 0 && (
+                                            <>
+                                                <div className='title-menu'>
+                                                    {menuProduct.menu.name}
+                                                </div>
+                                                {menuProduct.products.map((product, index) => (
+                                                    <div key={index} className='item-restaurant-row'>
+                                                        <div className='row'>
+                                                            <div className='col-auto item-restaurant-img'>
+                                                                <img className='img-item' src={`http://localhost:8080/img/${product.image}`} alt={product.name} />
+                                                            </div>
+                                                            <div className='col item-restaurant-info'>
+                                                                <h2 className='item-restaurant-name'>{product.name}</h2>
+                                                                <div className='item-restaurant-desc'>{product.detail}</div>
+                                                                <MyButton/>
+                                                            </div>
+                                                            <div className='col-auto item-restaurant-more'>
+                                                                <div className='row'>
+                                                                    <div className='col-auto product-price'>
+                                                                        <div className='current-price'>
+                                                                            {product.price}
+                                                                            <span className='price'>đ</span>
                                                                         </div>
                                                                     </div>
-                                                                );
-                                                            } else {
-                                                                return null;
-                                                            }
-                                                        })}
-                                                    </>
-                                                )}
-                                            </div>
-                                        );
-                                    })
-                                )}
+                                                                    <div className='col-auto adding-food-cart txt-right'>
+                                                                        <button className='btn-adding' onClick={() => addProductToCart(idShop, idUser, product.id)}></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </>
+                                        )}
+                                    </div>
+                                )))}
                             </div>
                         </div>
                         <div className="col">
