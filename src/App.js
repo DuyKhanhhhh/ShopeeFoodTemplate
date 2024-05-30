@@ -1,4 +1,4 @@
-import HeadMerchant from './compoment/HeadMerchant';
+import HeadMerchant from './compoment/HeadMerchant.js';
 import CreateMerchant from './page/CreateMerchant';
 import UpdateMerchant from './page/UpdateMerchant';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,8 +6,10 @@ import CreateNewFood from './page/CreateNewFood';
 import FoodList from './page/FoodList';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeMerchant from './page/HomeMerchant';
-import ListOrderShop from './page/order/ListOrderShop';
-import ListOrderUser from './page/order/ListOrderUser';
+
+import ListOrderShop from './page/ListOrderShop';
+import ListOrderUser from './page/ListOrderUser';
+
 import HomeProduct from './Product/HomeProduct';
 import DetailProductMerchant from './page/DetailProductMerchant';
 import DetailsShopMerchant from './page/DetailsShopMerchant';
