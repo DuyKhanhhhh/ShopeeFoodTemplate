@@ -58,9 +58,7 @@ export default function HomeProduct() {
             const orderResponse = await axios.post(`http://localhost:8080/api/order/1/1`,null,{timeout :5000});
             console.log('Đặt hàng thành công', orderResponse.data);
             await Showcar()
-            // navigate(`/HomeProduct`);
         } catch (error) {
-            // const orderResponse = await axios.post(`http://localhost:8080/api/order/1/1`,null,{timeout :5000});
             return [];
         }
 

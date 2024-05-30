@@ -14,7 +14,6 @@ export default function CreateNewFood() {
     const [values, setValues] = useState({
         name: '',
         price: '',
-        quantity: '',
         detail: '',
     });
     const [errors, setErrors] = useState({});
@@ -70,7 +69,7 @@ export default function CreateNewFood() {
         const formData = new FormData();
         formData.append("name", values.name);
         formData.append("price", values.price);
-        formData.append("quantity", values.quantity);
+
         formData.append("detail", values.detail);
         formData.append("image", image);
         formData.append('menus', selectedMenuId);
