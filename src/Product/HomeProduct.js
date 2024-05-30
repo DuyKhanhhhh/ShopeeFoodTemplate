@@ -1,7 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import HeadHome from '../compoment/HeadHome';
+
 import '../css/LayoutHome.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faHeart as faDuotoneHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faRegularHeart, faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSadTear, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
@@ -9,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function HomeProduct() {
     const navigate = useNavigate();
+
     const [menuProducts, setMenuProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [idShop, setIdShop] = useState(1);
@@ -57,8 +61,20 @@ export default function HomeProduct() {
         } catch (error) {
             return [];
         }
-    }
 
+    }
+    async function CreateOrder() {
+        try {
+            const orderResponse = await axios.post(`http://localhost:8080/api/order/1/1`);
+            console.log('đặt hàng thành công', orderResponse.data);
+            navigater(`/HomeProduct`)
+        } catch (error) {
+            console.error('Error fetching order data:', error);
+            return [];
+        }
+
+  
+    }
     async function getMenu() {
         const response = await axios.get(`http://localhost:8080/api/menus/1`);
         console.log(response.data);
@@ -132,6 +148,7 @@ export default function HomeProduct() {
         try {
             await axios.put(`http://localhost:8080/api/detailCart/minus/${id}`);
             Showcar();
+            // window.location.reload(); 
         } catch (error) {
             if (error.response && error.response.status === 204) {
                 Showcar();
@@ -307,9 +324,11 @@ export default function HomeProduct() {
                                     </form>
                                 </div>
                                 {noResults ? (
+
                                     <div className="no-results">
                                         <FontAwesomeIcon className='icon' icon={faSadTear} /> 
                                         <div>Không có sản phẩm</div>
+
                                     </div>
                                 ) : (
                                     menuProducts.map((menuProduct, index) => {
@@ -380,6 +399,7 @@ export default function HomeProduct() {
                                         <div key={item.id}>
                                             <div className=''>
                                                 <div className='row'>
+
                                                     <div className='col-5 name-cart'>{item.product.name}</div>
                                                     <div className='inputQuantity col-3'>
                                                         <button className='btnQuantity' onClick={() => handleMinus(item.id)}>-</button>
@@ -387,6 +407,7 @@ export default function HomeProduct() {
                                                         <button className='btnQuantity' onClick={() => handlePlus(item.id)}>+</button>
                                                     </div>
                                                     <div className='col-4 price-cart'>{formatNumberWithCommas(item.product.price)} đ</div>
+
                                                 </div>
                                                 <hr/>
                                             </div>
@@ -406,6 +427,8 @@ export default function HomeProduct() {
                     </div>
                 </div>
             </div>
+            <FooterHome/>
         </div>
+     
     );
 }
