@@ -6,16 +6,14 @@ h4 {
 
 .table-image {
   margin-top: -25px;
-  td, th {
-    vertical-align: middle;
-    
-  }
 }
+
 .table-image td,
 .table-image th {
-    text-align: center; /* Căn giữa nội dung trong các ô */
-    vertical-align: middle; /* Căn giữa theo chiều dọc */
+  text-align: center; /* Căn giữa nội dung trong các ô */
+  vertical-align: middle; /* Căn giữa theo chiều dọc */
 }
+
 .pagination .page-link {
   background-color: #ee4d2d;
   border-color: #ee4d2d;
@@ -30,4 +28,17 @@ h4 {
 .pagination .page-item.active .page-link {
   background-color: #ff6f52;
   border-color: #ff6f52;
+}
+
+.centered-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.table-image .image {
+  max-width: 100%;
+  height: auto;
 }

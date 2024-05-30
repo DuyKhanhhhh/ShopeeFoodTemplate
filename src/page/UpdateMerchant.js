@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -128,28 +127,6 @@ function UpdateMerchant() {
                             </div>
                         </div>
                         <div className="row mb-3">
-                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Số điện thoại</label>
-                            <div className="col-sm-10">
-                                <input type="number"
-                                    name="phoneNumber"
-                                    value={values.phoneNumber}
-                                    onChange={handleInput}
-                                    className="form-control" id="phoneNumber" />
-                                {errors.phoneNumber && <p style={{ color: "red" }}>{errors.phoneNumber}</p>}
-                            </div>
-                        </div>
-                        <div className="row mb-3">
-                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Email</label>
-                            <div className="col-sm-10">
-                                <input type="email"
-                                    name="email"
-                                    value={values.email}
-                                    onChange={handleInput}
-                                    className="form-control" id="email" />
-                                {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-                            </div>
-                        </div>
-                        <div className="row mb-3">
                             <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Địa chỉ</label>
                             <div className="col-sm-10">
                                 <input type="text"
@@ -160,9 +137,32 @@ function UpdateMerchant() {
                                 {errors.address && <p style={{ color: "red" }}>{errors.address}</p>}
                             </div>
                         </div>
-                        <div className="row mb-3">
+
+                        <div className="row mb-3 contai">
+                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Email</label>
+                            <div className="col-sm-4">
+                                <input type="email"
+                                    name="email"
+                                    value={values.email}
+                                    onChange={handleInput}
+                                    className="form-control" id="email" />
+                                {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+                            </div>
+                            <label className="col-sm-2 col-form-label label-center"><span className='warning'>*</span> Số điện thoại</label>
+                            <div className="col-sm-4">
+                                <input type="number"
+                                    name="phoneNumber"
+                                    value={values.phoneNumber}
+                                    onChange={handleInput}
+                                    className="form-control" id="phoneNumber" />
+                                {errors.phoneNumber && <p style={{ color: "red" }}>{errors.phoneNumber}</p>}
+                            </div>
+                        </div>
+
+
+                        <div className="row mb-3 contai">
                             <label className="col-sm-2 col-form-label"><span className='warning'>*</span>  Thành phố</label>
-                            <div className="col-md-9 pe-5">
+                            <div className="col-md-4">
                                 <select className="form-select"
                                     onChange={handleCityChange}
                                     value={selectedCityId}>
@@ -173,10 +173,8 @@ function UpdateMerchant() {
                                     ))}
                                 </select>
                             </div>
-                        </div>
-                        <div className="row mb-3">
-                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Danh mục</label>
-                            <div className="col-sm-10">
+                            <label className="col-sm-2 col-form-label label-center"><span className='warning'>*</span> Danh mục</label>
+                            <div className="col-sm-4 ">
                                 <select className="form-select"
                                     onChange={handleCategoryChange}
                                     value={selectedCategoryId}>
@@ -188,9 +186,10 @@ function UpdateMerchant() {
                                 </select>
                             </div>
                         </div>
-                        <div className="row mb-3">
+
+                        <div className="row mb-3 contai">
                             <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Giờ mở cửa</label>
-                            <div className="col-sm-10">
+                            <div className="col-sm-4">
                                 <input type="time"
                                     name="timeStart"
                                     value={values.timeStart}
@@ -198,10 +197,8 @@ function UpdateMerchant() {
                                     className="form-control" id="namme" />
                                 {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
                             </div>
-                        </div>
-                        <div className="row mb-3">
-                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span> Giờ đóng cửa</label>
-                            <div className="col-sm-10">
+                            <label className="col-sm-2 col-form-label label-center"><span className='warning'>*</span> Giờ đóng cửa</label>
+                            <div className="col-sm-4">
                                 <input type="time"
                                     name="timeEnd"
                                     value={values.timeEnd}
@@ -235,4 +232,3 @@ function UpdateMerchant() {
 }
 
 export default UpdateMerchant;
-

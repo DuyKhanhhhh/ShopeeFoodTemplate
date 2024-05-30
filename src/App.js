@@ -1,4 +1,4 @@
-import HeadMerchant from './compoment/HeadMerchant';
+import HeadMerchant from './compoment/HeadMerchant.js';
 import CreateMerchant from './page/CreateMerchant';
 import UpdateMerchant from './page/UpdateMerchant';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,7 +6,12 @@ import CreateNewFood from './page/CreateNewFood';
 import FoodList from './page/FoodList';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeMerchant from './page/HomeMerchant';
+import ListOrderShop from './page/ListOrderShop';
+import ListOrderUser from './page/ListOrderUser';
+
 import HomeProduct from './Product/HomeProduct';
+import DetailProductMerchant from './page/DetailProductMerchant';
+import DetailsShopMerchant from './page/DetailsShopMerchant';
 
 
 function App() {
@@ -15,12 +20,15 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<HomeMerchant />} ></Route>
+      <Route path='/detailShop/:id' element={<DetailsShopMerchant />} ></Route>
       <Route path='/create' element={<CreateMerchant />} ></Route>
       <Route path='/updateShop/:id' element={<UpdateMerchant />} ></Route>
       <Route path="/createFood/:id" element={<CreateNewFood />}></Route>
       <Route path="/foodList/:id" element={<FoodList />}></Route>
       <Route path='/HomeProduct' element={<HomeProduct />} ></Route>
-    </Routes>
+      <Route path='/ListOrderShop/:id' element={<ListOrderShop />} ></Route>
+      <Route path='/ListOrderUser/:id' element={<ListOrderUser />} ></Route>
+    </Routes> 
     </BrowserRouter>
     </div>
   );

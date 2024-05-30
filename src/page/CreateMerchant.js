@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import HeadMerchant from "../compoment/HeadMerchant";
+import HeadMerchant from "../compoment/HeadMerchant.js";
 import "../css/LayoutMarchant.css";
 import Validation from "./Validate/ValidateMerchantCreate.js";
 export default function CreateMerchant() {
@@ -89,140 +89,135 @@ export default function CreateMerchant() {
         const file = e.target.files[0];
         setImage(file);
     }
-    return (
-        <div>
-            <HeadMerchant />
-            <div className="container">
-                <div className="containerCreate ">
-                    <div className="title">Thông tin đăng ký quán</div>
+return (
+    <div>
+        <HeadMerchant />
+        <div className="container">
+            <div className="containerCreate ">
+                <div className="title">Thông tin đăng ký quán</div>
 
-                    <form onSubmit={CreateMerchant} >
-                        <div className="row mb-3">
+                <form onSubmit={CreateMerchant} >
+                    <div className="row mb-3">
 
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Tên quán </label>
-                            <div className="col-sm-10">
-                                <input type="text"
-                                    name="name"
-                                    onChange={handleInput}
-                                    class="form-control"
-                                    id="name" />
-                                {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-                            </div>
+                        <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Tên quán </label>
+                        <div className="col-sm-10">
+                            <input type="text"
+                                placeholder="Tên quán"
+                                name="name"
+                                class="form-control"
+                                onChange={handleInput}
+                                id="name" />
+                            {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
                         </div>
-                            <div className="row mb-3">
-                                <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Số điện thoại</label>
-                                <div className="col-sm-10">
+                    </div>
+                    <div className="row mb-3">
+                        <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Địa chỉ </label>
+                        <div className="col-sm-10">
+                            <input type="text"
+                                name="address"
+                                placeholder="Địa chỉ cụ thể quán"
+                                onChange={handleInput}
+                                class="form-control" id="text" />
+                            {errors.address && <p style={{ color: "red" }}>{errors.address}</p>}
+                        </div>
+                    </div>
+                    <div className="row mb-3 contai">
 
-                                    <input type="number"
-                                        name="phoneNumber"
-                           
-                                        onChange={handleInput}
-                                        class="form-control" id="phoneNumber" />
-                                    {errors.phoneNumber && <p style={{ color: "red" }}>{errors.phoneNumber}</p>}
-                                </div>
-                        </div>
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label">
-                                <span className="warning">*</span> Email
-                            </label>
-                            <div className="col-sm-10">
+                        <label class="col-sm-2 col-form-label">
+                            <span className="warning">*</span> Email
+                        </label>
+                        <div className="col-sm-4">
 
-                                <input type="email"
-                                    name="email"
-                        
-                                    onChange={handleInput}
-                                    class="form-control" id="email" />
-                                {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-                            </div>
+                            <input type="email"
+                                name="email"
+                                placeholder="Nhập email"
+                                onChange={handleInput}
+                                class="form-control" id="email" />
+                            {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
                         </div>
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Địa chỉ </label>
-                            <div className="col-sm-10">
-                                <input type="text"
-                                    name="address"
-                                 
-                                    onChange={handleInput}
-                                    class="form-control" id="text" />
-                                {errors.address && <p style={{ color: "red" }}>{errors.address}</p>}
-                            </div>
+                        <label class="col-sm-2 col-form-label label-center"><span className='warning'>*</span> Số điện thoại</label>
+                        <div className="col-sm-4">
+
+                            <input type="text"
+                                name="phoneNumber"
+                                placeholder="Số điện thoại bàn hoặc di động"
+                                onChange={handleInput}
+                                class="form-control" id="phoneNumber" />
+                            {errors.phoneNumber && <p style={{ color: "red" }}>{errors.phoneNumber}</p>}
                         </div>
-                        <div className="row mb-3">
-                            <label className="col-sm-2 col-form-label"><span className='warning'>*</span>  Thành phố</label>
-                            <div className="col-md-9 pe-5">
-                                <select className="form-select"
-                                    onChange={handleCityChange}
-                                    value={selectedCityId}>
-                                    {idCity.map((city) => (
-                                        <option key={city.id} value={city.id}>
-                                            {city.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label className="col-sm-2 col-form-label"><span className='warning'>*</span>  Thành phố</label>
+                        <div className="col-md-4">
+                            <select class="form-select"
+                                onChange={handleCityChange}
+                                value={selectedCityId}>
+                                {idCity.map((city) => (
+                                    <option key={city.id} value={city.id}>
+                                        {city.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"><span className='warning'>*</span>  Danh mục</label>
-                            <div className="col-sm-10">
-                                <select className="form-select"
-                                    onChange={handleCategoryChange}
-                                    value={selectedCategoryId}>
-                                    {idCategory.map((category) => (
-                                        <option key={category.id} value={category.id}>
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                        <label class="col-sm-2 col-form-label label-center"><span className='warning'>*</span>  Danh mục</label>
+                        <div className="col-sm-4">
+                            <select class="form-select"
+                                onChange={handleCategoryChange}
+                                value={selectedCategoryId}>
+                                {idCategory.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
-                         <div className="row mb-3">
-                                    <label class="col-sm-2 col-form-label"><span className='warning'>*</span> Giờ mở cửa</label>
-                                    <div className="col-sm-10">
-                                        <input type="time" 
-                                    name="timeStart"
-                                  
-                                    onChange={handleInput}
-                                        class="form-control" id="namme" />
-                                {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
-                                    </div>
-                                </div>
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label">
-                                <span className="warning">*</span> Giờ đóng cửa
-                            </label>
-                            <div className="col-sm-10">
-                                <input type="time"
-                                    name="timeEnd"
-                                    value={values.timeEnd}
-                                    onChange={handleInput}
-                                    class="form-control" id="namme" />
-                                {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
-                            </div>
-                        </div> 
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label">
-                                <span className="warning">*</span> Ảnh
-                            </label>
-                            <div className="col-sm-10">
-                                <input type="file" name="image"
-                                    onChange={handleImageChange} class="form-control" id="image" />
-                                {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
-                            </div>
+                    </div>
+
+                    <div className="row mb-3">
+                        <label class="col-sm-2 col-form-label "><span className='warning'>*</span> Giờ mở cửa</label>
+                        <div className="col-sm-4">
+                            <input type="time"
+                                name="timeStart"
+
+                                onChange={handleInput}
+                                class="form-control" id="namme" />
+                            {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
                         </div>
-                        <div className="row mb-3">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div className='col'>
-                                <Link to={"/"} className=' btnBack'>Quay lại</Link>
-                                <button type="submit" className="btnSave">
-                                    Lưu
-                                </button>
-                            </div>
+                        <label class="col-sm-2 col-form-label label-center">
+                            <span className="warning">*</span> Giờ đóng cửa
+                        </label>
+                        <div className="col-sm-4">
+                            <input type="time"
+                                name="timeEnd"
+                                value={values.timeEnd}
+                                onChange={handleInput}
+                                class="form-control" id="namme" />
+                            {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
                         </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label class="col-sm-2 col-form-label">
+                            <span className="warning">*</span> Ảnh
+                        </label>
+                        <div className="col-sm-10">
+                            <input type="file" name="image"
+                                onChange={handleImageChange} class="form-control" id="image" />
+                            {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div className='col'>
+                            <Link to={"/"} className=' btnBack'>Quay lại</Link>
+                            <button type="submit" className="btnSave">
+                                Lưu
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    );
+    </div>
+);
 
 }
-
-
