@@ -44,6 +44,9 @@ function FoodList() {
             console.error('Error fetching data:', error);
         }
     };
+    function formatNumberWithCommas(number) {
+        return number.toLocaleString('de-DE');
+    }
 
     useEffect(() => {
         fetchData();
@@ -52,6 +55,7 @@ function FoodList() {
     const handleSearch = async (e) => {
         e.preventDefault();
         await fetchData();
+
     };
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -75,6 +79,7 @@ function FoodList() {
         } catch (error) {
             console.error('Error updating product status:', error);
         }
+
     };
 
     return (
@@ -103,6 +108,7 @@ function FoodList() {
 
                 {currentProducts.length > 0 && (
                     <table className="table table-image">
+
                     <thead>
                       <tr>
                         <th scope="col">Tên</th>

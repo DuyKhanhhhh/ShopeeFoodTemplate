@@ -144,6 +144,7 @@ return (
                                 onChange={handleInput}
                                 class="form-control" id="phoneNumber" />
                             {errors.phoneNumber && <p style={{ color: "red" }}>{errors.phoneNumber}</p>}
+
                         </div>
                     </div>
                     <div className="row mb-3">
@@ -167,10 +168,12 @@ return (
                                 {idCategory.map((category) => (
                                     <option key={category.id} value={category.id}>
                                         {category.name}
+
                                     </option>
                                 ))}
                             </select>
                         </div>
+
                     </div>
 
                     <div className="row mb-3">
@@ -190,10 +193,12 @@ return (
                             <input type="time"
                                 name="timeEnd"
                                 value={values.timeEnd}
+
                                 onChange={handleInput}
                                 class="form-control" id="namme" />
                             {errors.timeStart && <p style={{ color: "red" }}>{errors.timeStart}</p>}
                         </div>
+
                     </div>
                     <div className="row mb-3">
                         <label class="col-sm-2 col-form-label">
@@ -214,10 +219,14 @@ return (
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 );
 
+
 }
+
+
