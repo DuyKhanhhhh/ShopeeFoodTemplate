@@ -108,9 +108,7 @@ function FoodList() {
                         <th scope="col">Tên</th>
                         <th scope="col">Giá</th>
                         <th scope="col">Ảnh</th>
-                        <th scope="col">Số lượng món ăn</th>
                         <th scope="col">Chi tiết</th>
-                        <th scope="col">Công cụ</th>
                         <th scope="col">Trạng thái</th>
                       </tr>
                     </thead>
@@ -120,12 +118,7 @@ function FoodList() {
                           <td>{product.name}</td>
                           <td>{product.price} VND</td>
                           <td><img className='image' src={`http://localhost:8080/img/${product.image}`} alt="" /></td>
-                          <td>{product.quantity} sản phẩm</td>
                           <td>{product.detail}</td>
-                          <td>
-                            <FontAwesomeIcon className="icon" icon={faTrash} />
-                            <FontAwesomeIcon className="icon" icon={faPenSquare} />
-                          </td>
                           <td>
                             <div className="centered-cell">
                               <div className="form-check form-switch">
