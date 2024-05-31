@@ -18,7 +18,7 @@ function MyButton() {
                     color: count === 1 ? 'white' : 'black' // Màu chữ trắng nếu count là 1
                 }}
             >
-                <FontAwesomeIcon icon={faThumbsUp} /> Yêu thích: {count}
+                <FontAwesomeIcon icon={faThumbsUp} /> {count}
             </button>
         </>
     );
