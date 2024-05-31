@@ -9,7 +9,7 @@ import HomeMerchant from './page/HomeMerchant';
 
 import ListOrderShop from './page/ListOrderShop';
 import ListOrderUser from './page/ListOrderUser';
-
+import OrderAndListOrderItem from './Product/OrderAndListOrderItem.js';
 import HomeProduct from './Product/HomeProduct';
 import DetailProductMerchant from './page/DetailProductMerchant';
 import DetailsShopMerchant from './page/DetailsShopMerchant';
@@ -20,6 +20,7 @@ function App() {
     <div >
     <BrowserRouter>
     <Routes>
+    <Route path='/OrderAndListOrderItem' element={<OrderAndListOrderItem />} ></Route>
       <Route path='/' element={<HomeMerchant />} ></Route>
       <Route path='/detailShop/:id' element={<DetailsShopMerchant />} ></Route>
       <Route path='/create' element={<CreateMerchant />} ></Route>
