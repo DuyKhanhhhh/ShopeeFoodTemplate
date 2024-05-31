@@ -6,6 +6,8 @@ import { faHeart as faDuotoneHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faRegularHeart, faStar, faClock, faStarHalfStroke, faMagnifyingGlass, faSadTear, faSackDollar, faPhone, faLocationDot, faEnvelope, faWallet } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
+import OrderAndListOrderItem from './OrderAndListOrderItem';
+import { Link } from 'react-router-dom';
 
 export default function HomeProduct() {
     const navigate = useNavigate();
@@ -397,9 +399,9 @@ export default function HomeProduct() {
                                     <div className='restaurant-price'>
                                         <FontAwesomeIcon className='iconWallet' icon={faWallet} /> <span className='sumPrice'>Tổng: {formatNumberWithCommas(sum)} đ</span>
                                     </div>
-                                    <form onSubmit={CreateOrder}>
-                                        <button type='submit'>Thanh Toán</button>
-                                    </form>
+                                      <form className="payment-form">
+                          <Link to="/OrderAndListOrderItem" className="payment-button">+ Xác nhận thanh toán</Link>
+                             </form>
                                 </div>
                             </div>
                         </div>
