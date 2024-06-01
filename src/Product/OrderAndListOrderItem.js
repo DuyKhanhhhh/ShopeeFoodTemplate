@@ -13,6 +13,7 @@ export default function OrderAndListOrderItem() {
     const [address,setAddress] = useState([]);
     const navigater = useNavigate();
     const [shop,setShop]=useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     async function CreateOrder(e) {
         e.preventDefault()
         try {
@@ -48,11 +49,6 @@ export default function OrderAndListOrderItem() {
         }
     }
 
-    useEffect(() => {
-        getShop();
-        getOrderItem();
-        getAddressList();
-    }, []);
 
     function formatNumberWithCommas(number) {
         return number.toLocaleString('de-DE');
@@ -115,13 +111,50 @@ export default function OrderAndListOrderItem() {
         });
         return total;
     };
+    var buttons = document.querySelectorAll('.itemG button');
 
-    // Update the total sum when cart changes
+// Lặp qua từng nút và thêm sự kiện nhấp vào
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Lấy phần tử cha (.itemG) của nút đã được nhấp vào
+        var itemG = button.closest('.itemG');
+
+        // Kiểm tra xem có lớp .selected được thêm vào chưa
+        if (itemG.classList.contains('selected')) {
+            // Nếu đã có, loại bỏ nó
+            itemG.classList.remove('selected');
+        } else {
+            // Nếu chưa có, thêm vào
+            itemG.classList.add('selected');
+        }
+    });
+});
+
+useEffect(() => {
+    var buttons = document.querySelectorAll('.itemG button');
+
+    // Lặp qua từng nút và thêm sự kiện nhấp vào
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Lấy phần tử cha (.itemG) của nút đã được nhấp vào
+            var itemG = button.closest('.itemG');
+
+            // Loại bỏ lớp .selected khỏi tất cả các phần tử .itemG
+            document.querySelectorAll('.itemG').forEach(function(item) {
+                item.classList.remove('selected');
+            });
+
+            // Thêm lớp .selected vào phần tử .itemG được chọn
+            itemG.classList.add('selected');
+        });
+    });
+    }, []);
+    
     useEffect(() => {
         setSum(calculateSum(cart));
     }, [cart]);
 
-    // Initial data fetch for cart
+    
     useEffect(() => {
         Showcar();
     }, []);
@@ -167,15 +200,14 @@ export default function OrderAndListOrderItem() {
                    <button className="button-eidt">giao tới địa chỉ này </button>
                 </div>
                 </div>
-                <div class="itemG">
-                <FontAwesomeIcon className="div-icon" icon={faLocationDot}/>
-                <div className="div-text-in">
-                <div className="div-NameAddress">Other</div> 
-                   <div className="div-text-in-text">njsadmnfsjdfsdm ffdnsdjfndngd fgdfngf hsabdbdsfbsdhfbdsfhgdfbg</div>
-                   <div className="div-text-in-text">Ni Han Wyu</div>
-                   <button className="button-eidt">Thêm địa chỉ giao hàng mới </button>
-                </div>
-                </div>
+                <div className="itemB">
+                                <FontAwesomeIcon className="div-icon" icon={faLocationDot} />
+                                <div className="div-text-in">
+                                    <div className="div-NameAddress">Other</div>
+                                    <div className="div-text-in-text">Thêm địa chỉ giao hàng mới</div>
+                                    <button className="button-eidt-b" onClick={() => setIsModalOpen(true)}>Thêm địa chỉ giao hàng mới</button>
+                                </div>
+                            </div>
                 
                 </div>
                 </div>
@@ -243,6 +275,34 @@ export default function OrderAndListOrderItem() {
                             </div>
                             </div>
         </div>
+        {isModalOpen && (
+                <div className="modal">
+                    
+                    <div className="modal-content">
+                        <h2>Thêm địa chỉ mới</h2>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Tên khách hàng "
+                          
+                        />
+                        <input
+                            type="text"
+                            name="details"
+                            placeholder="Địa chỉ nhận hàng"
+                          
+                        />
+                        <input
+                            type="text"
+                            name="contact"
+                            placeholder="Số điện thoại nhận hàng"
+                        
+                        />
+                        <button >Submit</button>
+                        <button onClick={() => setIsModalOpen(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
