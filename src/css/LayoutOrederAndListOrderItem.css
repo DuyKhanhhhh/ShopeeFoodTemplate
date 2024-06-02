@@ -6,6 +6,7 @@
             margin-right: auto;
             display: flex;
             justify-content: space-between;
+            background-color: white;
        
         }
         *{
@@ -39,6 +40,7 @@
             border-radius: 5px;
         }
         .div4{
+           
             display: grid;
             grid-template-columns: auto auto;
             grid-gap: 10px;
@@ -60,16 +62,28 @@
         }
         .itemB{
             background-color: white;
-            margin-right: 40px;
+            margin-left: 22px;
             margin-top: 4px;
             margin-bottom: 35px;
-            margin-left: 20px;
+            margin-right: 20px;
             height: auto;
             border-radius: 5px;
             border: 1px solid rgba(128, 128, 128, 0.5);
             box-shadow: 1px 3px 1px 1px rgba(128, 128, 128, 0.5);
             display: flex;
             justify-content: space-between;
+
+        }
+        .button-eidt-b{
+            background-color: rgb(54, 75, 54);
+            width: 83%;
+            margin-top: 28%;
+            margin-right: 20px;
+            border-radius: 7px;
+            margin-bottom: 10%;
+            height: 36px;
+            border: 0;
+            color: aliceblue;
 
         }
         .The-text{
@@ -85,6 +99,9 @@
             background-color: white;
             box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.5);
         }
+        .itemG.selected {
+            border-color: #7a848d; /* Màu viền khi chọn */
+            box-shadow: 5px 5px 5px 5px rgba(12, 66, 21, 0.5);        }
         .div-icon{
             align-content: center;
             font-size: 300%;
@@ -107,7 +124,7 @@
         .button-eidt{
             background-color: rgb(123, 189, 123);
             width: 83%;
-            margin-top: 10%;
+            margin-top: 11%;
             margin-right: 20px;
             border-radius: 7px;
             margin-bottom: 10%;
@@ -199,3 +216,62 @@
         /* background-color: #62b762;; */
         border-radius: 12px;
        }
+       .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 600px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-content input {
+        display: block;
+        width: calc(100% - 20px);
+        margin: 10px 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .modal-content button {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .modal-content button:nth-child(4) {
+        background: #28a745;
+        color: white;
+    }
+    
+    .modal-content button:nth-child(5) {
+        background: #dc3545;
+        color: white;
+    }
+    button{
+        width: 538px;
+    }
+.exit-icon{
+    font-size: 25px;
+}
+.edit-icon{
+   
+    font-size: 25px;
+    position: relative;
+    bottom: 100px;
+    
+}

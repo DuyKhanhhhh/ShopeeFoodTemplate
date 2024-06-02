@@ -156,6 +156,7 @@
 }
 
 .btnSearch {
+    width: 10%;
     font-size: 14px;
     border-radius: 8px;
     min-width: unset;
