@@ -22,3 +22,18 @@ th{
 .pagination{
     justify-content: center;
 }
+.modal-content{
+    height: 40rem;
+}
+.modal-dialog {
+    display: flex;
+    min-width: 60%;
+}
+.modal-footer{
+    display: flex;
+    margin: 0 auto;
+}
+.color-modal{
+    font-size: 19px;
+    color: rgb(255, 9, 9);
+}

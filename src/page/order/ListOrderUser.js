@@ -1,18 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./ListOrderUser.css"; // Import the CSS file
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTrash, faPenSquare, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Modal from "react-bootstrap/Modal";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faTrash,
+  faPenSquare,
+  faArrowLeft,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import HeadHome from "../../compoment/HeadHome";
+import ModalDemo from "./ModalDemo";
 function ListOrderUser() {
   const [orders, setOrders] = useState([]);
   const params = useParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const [isShowModalOrder, setIsShowModalOrder] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [ordersPerPage] = useState(8);
+  const [orderId, setDataOrderId] = useState("");
+  const test = useRef();
+  const [user,setUser] = useState({});
 
+
+  const handleCloseOrder = (idOrder) => {
+    setIsShowModalOrder(true);
+    setDataOrderId(idOrder);
+  };
+  const handleClose = () => {
+    setIsShowModalOrder(false);
+  };
+  async function listOrdersByOrderId() {
+    if (orderId) {
+      console.log(orderId);
+      const response = await axios.get(
+        `http://localhost:8080/api/order/orderItem/${orderId}`
+      );
+      test.current = response.data;
+      console.log(test.current);
+    }
+  }
   async function listOrdersByUser() {
     try {
       const response = await axios.get(
@@ -62,6 +94,11 @@ function ListOrderUser() {
     listOrdersByUser();
   }, []);
 
+  useEffect(() => {
+    setIsShowModalOrder(true);
+    listOrdersByOrderId();
+  }, [orderId]);
+
   const calculateOrderTotal = (orderItems) => {
     return orderItems.reduce((total, item) => {
       return total + item.quantity * item.product.price;
@@ -70,9 +107,7 @@ function ListOrderUser() {
 
   return (
     <>
-      <HeadHome>
-
-      </HeadHome>
+      <HeadHome></HeadHome>
       <h2 className="center">Danh sách đơn hàng</h2>
 
       <table class="table table-bordered">
@@ -104,14 +139,24 @@ function ListOrderUser() {
               {formatNumberWithCommas(calculateOrderTotal(order.orderItems))} đ
             </td>
             <td>
-              {order.status.type}<br/>
-              {/* <button type="button" class="btn btn-danger">Hủy đơn</button> */}
-              </td>
+              {order.status.type}
+              <br />
+              {/* <div>
+                     <button type="button" class="btn btn-danger">Hủy đơn</button>
+              </div> */}
+            </td>
             <td className="link">
               <div>
-                <Link>Chi tiết đơn hàng</Link>
+                <Link
+                  onClick={() => {
+                    setModalShow(true);
+                    setDataOrderId(order.id);
+                    setUser(order.user)
+                  }}
+                >
+                  Chi tiết đơn hàng
+                </Link>
               </div>
-              
             </td>
           </tr>
         ))}
@@ -148,6 +193,12 @@ function ListOrderUser() {
           </button>
         </li>
       </ul>
+      <ModalDemo
+        show={modalShow}
+        id={orderId}
+        users={user}
+        onHide={() => setModalShow(false)}
+      />
     </>
   );
 }

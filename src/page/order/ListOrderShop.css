@@ -159,3 +159,21 @@
     width: 120px;
     margin-top: 5px;
 }
+.modal-content{
+    height: 40rem;
+}
+.modal-dialog {
+    display: flex;
+    min-width: 60%;
+}
+.modal-footer{
+    display: flex;
+    margin: 0 auto;
+}
+.color-modal{
+    font-size: 50px;
+    color: rgb(255, 9, 9);
+}
+.padding-sum{
+    padding-right: 700px;
+}
